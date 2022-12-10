@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 int main()
 {
-    int i,j,n,len1,len2;
+    int i,j,n,len1,len2,delta;
     scanf("%d",&n);
     char p1[10];
     char p2[10];
@@ -36,8 +37,10 @@ int main()
     //--------------------------------------------------------------------------------//
     len1=strlen(p1);                                         /*printing players'names*/
     len2=strlen(p2);
+    delta=len1-len2;
     for(i=0;i<len1;i++)printf("%c",p1[i]);
-    for(i=0;i<(2*n+4);i++)printf(" ");
+    if(delta>=0) {for(i=0;i<(2*n+4)-delta;i++)printf(" ");}
+    else if(delta<0) {for(i=0;i<2*n+4;i++)printf(" ");}
     for(i=0;i<len2;i++)printf("%c",p2[i]);
     printf("\n");
     //--------------------------------------------------------------------------------//

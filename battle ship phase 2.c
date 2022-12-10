@@ -87,34 +87,12 @@ int main()
         printf("       ");
         for(j=0;j<n+1;j++)
         {
-<<<<<<< Updated upstream
             if(i>0&&j>0)printf("\033\e[0;34m");
             if(FOCP2[i][j]=='~')printf("≋ ",FOCP2[i][j]);
             else if(FOCP2[i][j]=='*')printf("♆ ",FOCP2[i][j]);
             else if(FOCP2[i][j]=='0') printf("  ",FOCP2[i][j]);
                 else printf("%c ",FOCP2[i][j]);
             printf("\033[0m");
-=======
-            printf("FOCP1\n");
-            for(j=0;j<n+1;j++)
-            {
-                if(i>0&&j>0)printf("\033\e[0;34m");
-                if(FOCP1[i][j]=='~')printf("≋ ",FOCP1[i][j]);
-                else if(FOCP1[i][j]=='0') printf("  ",FOCP1[i][j]);
-                    else printf("%c ",FOCP1[i][j]);
-                printf("\033[0m");
-            }
-            printf("       ");
-            for(j=0;j<n+1;j++)
-            {
-                if(i>0&&j>0)printf("\033\e[0;34m");
-                if(FOCP1[i][j]=='~')printf("≋ ",FOCP2[i][j]);
-                else if(FOCP2[i][j]=='0') printf("  ",FOCP2[i][j]);
-                    else printf("%c ",FOCP2[i][j]);
-                printf("\033[0m");
-            }
-            printf("\n");
->>>>>>> Stashed changes
         }
         printf("\n");
     }
