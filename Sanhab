@@ -36,7 +36,7 @@ int main()
             for(j=0;j<n+1;j++)
             {
                 if(i>0&&j>0)printf("\033\e[0;34m");
-                if(FOCP1[i][j]=='~')printf("≋",FOCP1[i][j]);
+                if(FOCP1[i][j]=='~')printf("≋ ",FOCP1[i][j]);
                 else printf("%c ",FOCP1[i][j]);
                 printf("\033[0m");
             }
@@ -44,7 +44,7 @@ int main()
             for(j=0;j<n+1;j++)
             {
                 if(i>0&&j>0)printf("\033\e[0;34m");
-                if(FOCP1[i][j]=='~')printf("≋",FOCP2[i][j]);
+                if(FOCP1[i][j]=='~')printf("≋ ",FOCP2[i][j]);
                 else printf("%c ",FOCP2[i][j]);
                 printf("\033[0m");
             }
