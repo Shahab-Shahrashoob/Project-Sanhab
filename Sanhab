@@ -1,9 +1,8 @@
 #include <stdio.h>
 
-int main()
+int board(const int n)
 {
     int n,i,j;
-    scanf("%d",&n);
     char player1[n+1][n+1];
     char player2[n+1][n+1];
     //---------------------------------------------------------------------------------//
