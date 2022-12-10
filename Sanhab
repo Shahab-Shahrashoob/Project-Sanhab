@@ -6,7 +6,7 @@ int main(){
     char p1[n+1][n+1];
     char player2[n+1][n+1];
     for(i=0;i<n+1;i++){
-        p1[0][i]=i+48;                                       /*Grid for player 1 board*/
+        p1[0][i]=i+48;                                      
         p1[i][0]=i+48;
     }
     for(i=1;i<n+1;i++){
