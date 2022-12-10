@@ -39,7 +39,7 @@ int main()
                 else printf("%c ",FOCP1[i][j]);
             printf("\033[0m");
         }
-        printf("   |   ");
+        printf("      ");
         for(j=0;j<n+1;j++)
         {
             if(i>0&&j>0)printf("\033\e[0;34m");
