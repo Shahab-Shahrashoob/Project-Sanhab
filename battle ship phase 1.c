@@ -48,5 +48,5 @@ int board(const int n)
             printf("\n");
         }
     }
-    return 1;
+    return 0;
 }
