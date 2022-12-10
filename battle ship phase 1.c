@@ -1,8 +1,9 @@
 #include <stdio.h>
 
-int board(const int n)
+int main()
 {
-    int i,j;
+    int i,j,n;
+    scanf("%d",&n);
     char FOCP1[n+1][n+1];
     char FOCP2[n+1][n+1];
     //---------------------------------------------------------------------------------//
@@ -30,23 +31,24 @@ int board(const int n)
     //--------------------------------------------------------------------------------//
     for(i=0;i<n+1;i++)                                          /*Printing the boards*/
     {
-        for(i=0;i<n+1;i++)
+        for(j=0;j<n+1;j++)
         {
-            for(j=0;j<n+1;j++)
-            {
-                if(i>0&&j>0)printf("\033\e[0;34m");
-                printf("%c ",FOCP1[i][j]);
-                printf("\033[0m");
-            }
-            printf("  |   ");                                    
-            for(j=0;j<n+1;j++)
-            {
-                if(i>0&&j>0)printf("\033\e[0;34m");
-                printf("%c ",FOCP2[i][j]);
-                printf("\033[0m");
-            }
-            printf("\n");
+            if(i==0&&j==0) printf(" ");
+            if(i>0&&j>0)printf("\033\e[0;34m");
+            if(FOCP1[i][j]=='~')printf("≋ ",FOCP1[i][j]);
+            if(i>0&&j>0) printf("  %c",FOCP1[i][j]);
+            printf("\033[0m");
+       }
+        printf("      ");                                    
+        for(j=0;j<n+1;j++)
+        {
+            if(i==0&&j==0) printf(" ");
+            if(i>0&&j>0)printf("\033\e[0;34m");
+            if(FOCP1[i][j]=='~')printf("≋ ",FOCP2[i][j]);
+            else if(i>0&&j>0) printf("%d",FOCP2[i][j]);
+            printf("\033[0m");
         }
+        printf("\n");
     }
-    return 0;
+    return 1;
 }
