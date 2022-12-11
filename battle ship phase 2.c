@@ -1,22 +1,27 @@
 #include <stdio.h>
 
-void horizonal(int x,int y,char a[][30],int m){
+void horizonal(int x,int y,char a[][100],int m)
+{
     int i;
-    for(i=0;i<m;i++){
-        a[x+i][y]='*';
+    for(i=0;i<m;i++)
+    {
+        a[x][y+i]='*';
     }
 }
 
-void vertical(int x,int y,char a[][30],int m){
+void vertical(int x,int y,char a[][100],int m)
+{
     int i;
-    for(i=0;i<m;i++){
-        a[x][y+i]='*';
+    for(i=0;i<m;i++)
+    {
+        a[x+i][y]='*';
     }
 }
 
 int main()
 {
-    int i,j,n,ship,x,y,m;
+    int i,j,n,ship,x,y;
+    const int m=3;
     scanf("%d",&n);
     scanf("%d",&ship);
     char pos1[ship][3];
@@ -26,7 +31,6 @@ int main()
     char name1[20];
     char name2[20];
     char bin;
-    m=3;
     scanf("%s",name1);
     for(j=0;j<ship;j++){
         scanf("%c %c %c",pos1[j][0],pos1[j][1],pos1[j][2]);
@@ -79,7 +83,7 @@ int main()
         {
             if(i>0&&j>0)printf("\033\e[0;34m");
             if(FOCP1[i][j]=='~')printf("≋ ",FOCP1[i][j]);
-            else if(FOCP1[i][j]=='*')printf("♆ ",FOCP1[i][j]);
+            else if(FOCP1[i][j]=='*')printf("≋ ",FOCP1[i][j]);
             else if(FOCP1[i][j]=='0') printf("  ",FOCP1[i][j]);
                 else printf("%c ",FOCP1[i][j]);
             printf("\033[0m");
@@ -89,7 +93,7 @@ int main()
         {
             if(i>0&&j>0)printf("\033\e[0;34m");
             if(FOCP2[i][j]=='~')printf("≋ ",FOCP2[i][j]);
-            else if(FOCP2[i][j]=='*')printf("♆ ",FOCP2[i][j]);
+            else if(FOCP2[i][j]=='*')printf("≋ ",FOCP2[i][j]);
             else if(FOCP2[i][j]=='0') printf("  ",FOCP2[i][j]);
                 else printf("%c ",FOCP2[i][j]);
             printf("\033[0m");
