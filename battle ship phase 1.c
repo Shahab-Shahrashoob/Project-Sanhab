@@ -17,8 +17,9 @@ void vertical(int x,int y,char a[][30],int m){
 
 int main()
 {
-    int i,j,n,len1,len2,delta;
+    int i,j,n,len1,len2,delta,ship;
     scanf("%d",&n);
+    scanf("%d",&ship);
     char p1[10];
     char p2[10];
     scanf("%s",p1);
