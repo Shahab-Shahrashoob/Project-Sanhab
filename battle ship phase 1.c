@@ -1,24 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void horizonal(int x, int y, char a[][30], int m)
-{
-    int i;
-    for (i = 0; i < m; i++)
-    {
-        a[x + i][y] = '*';
-    }
-}
-
-void vertical(int x, int y, char a[][30], int m)
-{
-    int i;
-    for (i = 0; i < m; i++)
-    {
-        a[x][y + i] = '*';
-    }
-}
-
 int main()
 {
     int i, j, n, len1, len2, delta, ship;
