@@ -1,6 +1,19 @@
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
+
+void horizonal(int x,int y,char a[][30],int m){
+    int i;
+    for(i=0;i<m;i++){
+        a[x+i][y]='*';
+    }
+}
+
+void vertical(int x,int y,char a[][30],int m){
+    int i;
+    for(i=0;i<m;i++){
+        a[x][y+i]='*';
+    }
+}
 
 int main()
 {
