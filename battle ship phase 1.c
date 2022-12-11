@@ -25,10 +25,15 @@ int main()
     scanf("%s",p2);
     char FOCP1[n+1][n+1];
     char FOCP2[n+1][n+1];
-    int hit[3][2];
+    int hit1[3][2];
+    int hit2[3][2];
     for(i=0;i<3;i++)
     {
-        scanf("%d %d",&hit[i][0],&hit[i][1]);
+        scanf("%d %d",&hit1[i][0],&hit1[i][1]);
+    }
+    for(i=0;i<3;i++)
+    {
+        scanf("%d %d",&hit2[i][0],&hit2[i][1]);
     }
     //---------------------------------------------------------------------------------//
     for(i=0;i<n+1;i++)                                       /*Grid for player 1 board*/
@@ -53,10 +58,15 @@ int main()
         for(j=1;j<n+1;j++) {FOCP2[i][j]='~';}                
     }
     //--------------------------------------------------------------------------------//
-    
-
-
-
+    for(i=0;i<3;i++)
+    {
+        FOCP1[hit1[i][0]][hit1[i][1]]='*';
+    }
+    //--------------------------------------------------------------------------------//
+    for(i=0;i<3;i++)
+    {
+        FOCP2[hit2[i][0]][hit2[i][1]]='*';
+    }
     //--------------------------------------------------------------------------------//
     len1=strlen(p1);                                         /*printing players'names*/
     len2=strlen(p2);
@@ -73,6 +83,7 @@ int main()
         {
             if(i>0&&j>0)printf("\033\e[0;34m");
             if(FOCP1[i][j]=='~')printf("≋ ",FOCP1[i][j]);
+            else if(FOCP1[i][j]=='*'){printf("\033\e[0;31m");printf("* ",FOCP1[i][j]);printf("\033[0m");}
             else if(FOCP1[i][j]=='0') printf("  ",FOCP1[i][j]);
             else printf("%c ",FOCP1[i][j]);
             printf("\033[0m");
@@ -81,7 +92,8 @@ int main()
         for(j=0;j<n+1;j++)
         {
             if(i>0&&j>0)printf("\033\e[0;34m");
-            if(FOCP1[i][j]=='~')printf("≋ ",FOCP2[i][j]);
+            if(FOCP2[i][j]=='~')printf("≋ ",FOCP2[i][j]);
+            else if(FOCP2[i][j]=='*'){printf("\033\e[0;31m");printf("* ",FOCP2[i][j]);printf("\033[0m");}
             else if(FOCP2[i][j]=='0') printf("  ",FOCP2[i][j]);
             else printf("%c ",FOCP2[i][j]);
             printf("\033[0m");
