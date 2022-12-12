@@ -1,21 +1,32 @@
 #include <stdio.h>
 #include <string.h>
+#include <conio.h>
+#include <stdlib.h>
+
+void bold_blue()
+{
+    printf("\033[1;34m");
+}
+void bold_red()
+{
+    printf("\033[0;31m");
+}
+void reset()
+{
+    printf("\033[0;m");
+}
 
 int main()
 {
     int i, j, n, len1, len2, delta, ship;
     scanf("%d", &n);
     scanf("%d", &ship);
-    char p1[10];
     int hit1[3][2];
-    scanf("%s", p1);
     for (i = 0; i < 3; i++)
     {
         scanf("%d %d", &hit1[i][0], &hit1[i][1]);
     }
-    char p2[10];
     int hit2[3][2];
-    scanf("%s", p2);
     for (i = 0; i < 3; i++)
     {
         scanf("%d %d", &hit2[i][0], &hit2[i][1]);
@@ -51,73 +62,81 @@ int main()
         }
     }
     //--------------------------------------------------------------------------------//
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) /*damged ships of player 1 */
     {
         FOCP1[hit1[i][0]][hit1[i][1]] = '*';
     }
     //--------------------------------------------------------------------------------//
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) /*damaged ships of player 2*/
     {
         FOCP2[hit2[i][0]][hit2[i][1]] = '*';
     }
     //--------------------------------------------------------------------------------//
-    len1 = strlen(p1); /*printing players'names*/
-    len2 = strlen(p2);
-    delta = len1 - len2;
-    for (i = 0; i < len1; i++)
-        printf("%c", p1[i]);
-    if (delta >= 0)
-    {
-        for (i = 0; i < (2 * n + 4) - delta; i++)
-            printf(" ");
-    }
-    else if (delta < 0)
-    {
-        for (i = 0; i < 2 * n + 4; i++)
-            printf(" ");
-    }
-    for (i = 0; i < len2; i++)
-        printf("%c", p2[i]);
-    printf("\n");
+    printf("\n\nFOCP1"); /*printing players' names*/
+    for (i = 0; i <= 2 * n + 3; i++)
+        printf(" ");
+    printf("FOCP2");
+    printf("\nremaing ships:%d", ship);
+    for (i = 0; i <= 2 * n - 7; i++)
+        printf(" ");
+    printf("remaing ships:%d\n\n", ship);
     //--------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Printing the boards*/
     {
         for (j = 0; j < n + 1; j++)
         {
             if (i > 0 && j > 0)
-                printf("\033\e[0;34m");
-            if (FOCP1[i][j] == '~')
-                printf("≋ ", FOCP1[i][j]);
-            else if (FOCP1[i][j] == '*')
             {
-                printf("\033\e[0;31m");
-                printf("* ", FOCP1[i][j]);
-                printf("\033[0m");
+                if (FOCP1[i][j] == '~')
+                {
+                    bold_blue();
+                    printf("≋ ", FOCP1[i][j]);
+                    reset();
+                }
+                else if (FOCP1[i][j] == '*')
+                {
+                    bold_red();
+                    printf("☼ ", FOCP1[i][j]);
+                    reset();
+                }
             }
-            else if (FOCP1[i][j] == '0')
+            if (FOCP1[i][j] == '0')
                 printf("  ", FOCP1[i][j]);
-            else
-                printf("%c ", FOCP1[i][j]);
-            printf("\033[0m");
+            else if (i == 0 || j == 0)
+            {
+                if (i == 0)
+                    printf("%d ", j);
+                if (j == 0)
+                    printf("%d ", i);
+            }
         }
         printf("       ");
         for (j = 0; j < n + 1; j++)
         {
             if (i > 0 && j > 0)
-                printf("\033\e[0;34m");
-            if (FOCP2[i][j] == '~')
-                printf("≋ ", FOCP2[i][j]);
-            else if (FOCP2[i][j] == '*')
             {
-                printf("\033\e[0;31m");
-                printf("* ", FOCP2[i][j]);
-                printf("\033[0m");
+                if (FOCP2[i][j] == '~')
+                {
+                    bold_blue();
+                    printf("≋ ", FOCP2[i][j]);
+                    reset();
+                }
+                else if (FOCP2[i][j] == '*')
+                {
+                    bold_red();
+                    printf("☼ ", FOCP2[i][j]);
+                    reset();
+                }
             }
-            else if (FOCP2[i][j] == '0')
-                printf("  ", FOCP2[i][j]);
-            else
-                printf("%c ", FOCP2[i][j]);
-            printf("\033[0m");
+            if (FOCP1[i][j] == '0')
+                printf("  ", FOCP1[i][j]);
+            else if (i == 0 || j == 0)
+            {
+                if (i == 0)
+                    printf("%d ", j);
+                if (j == 0)
+                    printf("%d ", i);
+            }
         }
         printf("\n");
     }
