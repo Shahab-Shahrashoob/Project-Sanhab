@@ -1,4 +1,3 @@
-/*From Scratch*/
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
@@ -8,10 +7,12 @@ void bold_blue()
 {
     printf("\033[1;34m");
 }
+
 void bold_red()
 {
     printf("\033[0;31m");
 }
+
 void reset()
 {
     printf("\033[0;m");
@@ -35,37 +36,36 @@ void vertical(int x, int y, char a[][30], int m)
     }
 }
 
-
 int main()
 {
-    int i, j, n, len1, len2, delta, ship;
+    int i, j, n, len1, len2, delta, ships;
     scanf("%d", &n);
-    scanf("%d", &ship);
+    scanf("%d", &ships);
     char bin[3];
-    char ship1[ship][3];
-    char ship2[ship][3];
-    char name1[20];
-    char name2[20];
+    char ship1[5][3];
+    char ship2[5][3];
+    char name1[10];
+    char name2[10];
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
     //---------------------------------------------------------------------------------//
-    fgets(name1,20,stdin);                                     /*Scaning the coordinates*/
-    for(i=0;i<ship;i++){
+    scanf("%s",name1);                                       /*Scaning the coordinates*/
+    for(i=0;i<ships;i++){
         scanf("%c %c %c",ship1[i][0],ship1[i][1],ship1[i][2]);
     }
     scanf("%s",bin);
-    fgets(name2,20,stdin);
-    for(i=0;i<ship;i++){
+    scanf("%s",name2);
+    for(i=0;i<ships;i++){
         scanf("%c %c %c",ship2[i][0],ship2[i][1],ship2[i][2]);
     }
     //---------------------------------------------------------------------------------//
-    for (i = 0; i < n + 1; i++) /*Grid for player 1 board*/
+    for (i = 0; i < n + 1; i++)                              /*Grid for player 1 board*/
     {
         FOCP1[0][i] = i + 48;
         FOCP1[i][0] = i + 48;
     }
     //--------------------------------------------------------------------------------//
-    for (i = 1; i < n + 1; i++) /*Filling the sea of player 1*/
+    for (i = 1; i < n + 1; i++)                         /*Filling the sea of player 1*/
     {
         for (j = 1; j < n + 1; j++)
         {
@@ -73,13 +73,13 @@ int main()
         }
     }
     //--------------------------------------------------------------------------------//
-    for (i = 0; i < n + 1; i++) /*Grid for player 2 board*/
+    for (i = 0; i < n + 1; i++)                             /*Grid for player 2 board*/
     {
         FOCP2[0][i] = i + 48;
         FOCP2[i][0] = i + 48;
     }
     //--------------------------------------------------------------------------------//
-    for (i = 1; i < n + 1; i++) /*Filling the sea of player 2*/
+    for (i = 1; i < n + 1; i++)                         /*Filling the sea of player 2*/
     {
         for (j = 1; j < n + 1; j++)
         {
@@ -87,12 +87,12 @@ int main()
         }
     }
     //--------------------------------------------------------------------------------//
-    for(i=0;i<ship;i++)
+    for(i=0;i<ships;i++)
     {
         if(ship1[i][2]=='h') horizonal(ship1[i][0],ship1[i][1],FOCP1,3);
         else if(ship1[i][2]=='v') vertical(ship1[i][0],ship1[i][1],FOCP1,3);
     }
-    for(i=0;i<ship;i++)
+    for(i=0;i<ships;i++)
     {
        if(ship2[i][2]=='h') horizonal(ship2[i][0],ship2[i][1],FOCP2,3);
         else if(ship2[i][2]=='v') vertical(ship2[i][0],ship2[i][1],FOCP2,3); 
@@ -117,10 +117,10 @@ int main()
     for (i = 0; i < len2; i++)
         printf("%c", name2[i]);
     printf("\n");
-    printf("\nremaing ships:%d", ship);
+    printf("\nremaing ships:%d", ships);
     for (i = 0; i <= 2 * n - 7; i++)
         printf(" ");
-    printf("remaing ships:%d\n\n", ship);
+    printf("remaing ships:%d\n\n", ships);
     //--------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Printing the boards*/
     {
