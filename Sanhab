@@ -6,7 +6,7 @@ void horizonal(int x, int y, char a[][30], int m)
     int i;
     for (i = 0; i < m; i++)
     {
-        a[x + i][y] = '*';
+        a[x][y+i] = '*';
     }
 }
 
@@ -15,7 +15,7 @@ void vertical(int x, int y, char a[][30], int m)
     int i;
     for (i = 0; i < m; i++)
     {
-        a[x][y + i] = '*';
+        a[x+i][y] = '*';
     }
 }
 
