@@ -1,4 +1,3 @@
-/*From Scratch*/
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
@@ -22,7 +21,7 @@ void horizonal(int x, int y, char a[][30], int m)
     int i;
     for (i = 0; i < m; i++)
     {
-        a[x][y+i] = '+';
+        a[x][y + i] = '+';
     }
 }
 
@@ -31,32 +30,33 @@ void vertical(int x, int y, char a[][30], int m)
     int i;
     for (i = 0; i < m; i++)
     {
-        a[x+i][y] = '+';
+        a[x + i][y] = '+';
     }
 }
-
 
 int main()
 {
     int i, j, n, len1, len2, delta, ship;
     scanf("%d", &n);
     scanf("%d", &ship);
-    char bin[3];
-    char ship1[ship][3];
-    char ship2[ship][3];
-    char name1[20];
-    char name2[20];
+    char bin[4];
+    char ship1[ship][6];
+    char ship2[ship][6];
+    char name1[6];
+    char name2[7];
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
     //---------------------------------------------------------------------------------//
-    fgets(name1,20,stdin);                                     /*Scaning the coordinates*/
-    for(i=0;i<ship;i++){
-        scanf("%c %c %c",ship1[i][0],ship1[i][1],ship1[i][2]);
+    scanf("%s", name1);                                      /*Scaning the coordinates*/
+    for (i = 0; i < ship; i++)
+    {
+        fgets(ship1[i], 6, stdin);
     }
-    scanf("%s",bin);
-    fgets(name2,20,stdin);
-    for(i=0;i<ship;i++){
-        scanf("%c %c %c",ship2[i][0],ship2[i][1],ship2[i][2]);
+    scanf("%s", bin);
+    scanf("%s", name2);
+    for (i = 0; i < ship; i++)
+    {
+        fgets(ship2[i], 6, stdin);
     }
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1 board*/
@@ -87,15 +87,19 @@ int main()
         }
     }
     //--------------------------------------------------------------------------------//
-    for(i=0;i<ship;i++)
+    for (i = 0; i < ship; i++)
     {
-        if(ship1[i][2]=='h') horizonal(ship1[i][0],ship1[i][1],FOCP1,3);
-        else if(ship1[i][2]=='v') vertical(ship1[i][0],ship1[i][1],FOCP1,3);
+        if (ship1[i][4] == 'h')
+            horizonal(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
+        else if (ship1[i][4] == 'v')
+            vertical(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
     }
-    for(i=0;i<ship;i++)
+    for (i = 0; i < ship; i++)
     {
-       if(ship2[i][2]=='h') horizonal(ship2[i][0],ship2[i][1],FOCP2,3);
-        else if(ship2[i][2]=='v') vertical(ship2[i][0],ship2[i][1],FOCP2,3); 
+        if (ship2[i][4] == 'h')
+            horizonal(ship2[i][0] - 48, ship2[i][2] - 48, FOCP2, 3);
+        else if (ship2[i][4] == 'v')
+            vertical(ship2[i][0] - 48, ship2[i][2] - 48, FOCP2, 3);
     }
 
     //--------------------------------------------------------------------------------//
