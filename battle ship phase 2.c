@@ -22,7 +22,6 @@ int main()
     int i, j, n, len1, len2, delta, ship;
     scanf("%d", &n);
     scanf("%d", &ship);
-    char 
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
     //---------------------------------------------------------------------------------//
