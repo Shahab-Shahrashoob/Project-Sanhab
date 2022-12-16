@@ -22,8 +22,25 @@ int main()
     int i, j, n, len1, len2, delta, ship;
     scanf("%d", &n);
     scanf("%d", &ship);
+    char bin[3];
+    char ship1[ship][3];
+    char ship2[ship][3];
+    char name1[20];
+    char name2[20];
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
+    //---------------------------------------------------------------------------------//
+    scanf("%s",name1);                                       /*Scaning the coordinates*/
+    for(i=0;i<ship;i++){
+        scanf("%c %c %c",ship1[i][0],ship1[i][1],ship1[i][2]);
+    }
+    scanf("%s",bin);
+    scanf("%s",name2);
+    for(i=0;i<ship;i++){
+        scanf("%c %c %c",ship2[i][0],ship2[i][1],ship2[i][2]);
+    }
+    //---------------------------------------------------------------------------------//
+    
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1 board*/
     {
