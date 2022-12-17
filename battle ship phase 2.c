@@ -40,27 +40,6 @@ int main()
 {
     int i, j, n, len1, len2, delta, ships;
     scanf("%d", &n);
-<<<<<<< HEAD
-    scanf("%d", &ship);
-    char bin[4];
-    char ship1[ship][6];
-    char ship2[ship][6];
-    char name1[6];
-    char name2[7];
-    char FOCP1[n + 1][n + 1];
-    char FOCP2[n + 1][n + 1];
-    //---------------------------------------------------------------------------------//
-    scanf("%s", name1);                                      /*Scaning the coordinates*/
-    for (i = 0; i < ship; i++)
-    {
-        fgets(ship1[i], 6, stdin);
-    }
-    scanf("%s", bin);
-    scanf("%s", name2);
-    for (i = 0; i < ship; i++)
-    {
-        fgets(ship2[i], 6, stdin);
-=======
     scanf("%d", &ships);
     char bin[3];
     char ship1[5][3];
@@ -78,7 +57,6 @@ int main()
     scanf("%s",name2);
     for(i=0;i<ships;i++){
         scanf("%c %c %c",ship2[i][0],ship2[i][1],ship2[i][2]);
->>>>>>> 02dfcbacf0b6639673fdf8771f17970463acbf31
     }
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++)                              /*Grid for player 1 board*/
@@ -109,22 +87,14 @@ int main()
         }
     }
     //--------------------------------------------------------------------------------//
-<<<<<<< HEAD
-    for (i = 0; i < ship; i++)
-=======
     for(i=0;i<ships;i++)
->>>>>>> 02dfcbacf0b6639673fdf8771f17970463acbf31
     {
         if (ship1[i][4] == 'h')
             horizonal(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
         else if (ship1[i][4] == 'v')
             vertical(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
     }
-<<<<<<< HEAD
-    for (i = 0; i < ship; i++)
-=======
     for(i=0;i<ships;i++)
->>>>>>> 02dfcbacf0b6639673fdf8771f17970463acbf31
     {
         if (ship2[i][4] == 'h')
             horizonal(ship2[i][0] - 48, ship2[i][2] - 48, FOCP2, 3);
