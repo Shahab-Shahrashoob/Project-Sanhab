@@ -18,27 +18,9 @@ void reset()
     printf("\033[0;m");
 }
 
-void vertical(int y, int x, char a[][30], int m)
-{
-    int i;
-    for (i = 0; i < m; i++)
-    {
-        a[y][x  + i] = '*';
-    }
-}
-
-void horizonal(int y, int x, char a[][30], int m)
-{
-    int i;
-    for (i = 0; i < m; i++)
-    {
-        a[y + i][x] = '*';
-    }
-}
-
 int main()
 {
-    int i, j, n, len1, len2, delta, ships;
+    int i, j,k,x,y, n, len1, len2, delta, ships;
     scanf("%d\n%d", &n, &ships);
     char bin[4];
     char ship1[ships][7];
@@ -48,22 +30,20 @@ int main()
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
     //---------------------------------------------------------------------------------//
-    getchar();                                              /*Scaning the coordinates*/
+    getchar(); /*Scaning the coordinates*/
     gets(name1);
-    printf("\n");
-    for (i = 0; i <ships; i++)
+    for (i = 0; i < ships; i++)
     {
-        fgets(ship1[i],7,stdin);
+        fgets(ship1[i], 7, stdin);
     }
     printf("\n");
     scanf("%s", bin);
     printf("\n");
     getchar();
     gets(name2);
-    printf("\n");
     for (i = 0; i < ships; i++)
     {
-        fgets(ship2[i],7,stdin);
+        fgets(ship2[i], 7, stdin);
     }
     printf("\n");
     //---------------------------------------------------------------------------------//
@@ -97,17 +77,25 @@ int main()
     //--------------------------------------------------------------------------------//
     for (i = 0; i < ships; i++)
     {
-        if (ship1[i][5] == 'h')
-            horizonal(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
-        else if (ship1[i][5] == 'v')
-            vertical(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
+        x=ship1[i][0]-'0';
+        y=ship1[i][2]-'0';
+        if (ship1[i][4] == 'h')
+            for (k = 0; k < 3; k++)
+                FOCP1[x][y+k] = '*';
+        else if (ship1[i][4] == 'v')
+            for (k = 0; k < 3; k++)
+                FOCP1[x+k][y] = '*';
     }
     for (i = 0; i < ships; i++)
     {
-        if (ship2[i][5] == 'h')
-            horizonal(ship2[i][0] - 48, ship2[i][2] - 48, FOCP2, 3);
-        else if (ship2[i][5] == 'v')
-            vertical(ship2[i][0] - 48, ship2[i][2] - 48, FOCP2, 3);
+        x=ship2[i][0]-'0';
+        y=ship2[i][2]-'0';
+        if (ship2[i][4] == 'h')
+            for (k = 0; k < 3; k++)
+                FOCP2[x][y+k] = '*';
+        else if (ship2[i][4] == 'v')
+            for (k = 0; k < 3; k++)
+                FOCP2[x+k][y] = '*';
     }
 
     //--------------------------------------------------------------------------------//
@@ -128,7 +116,6 @@ int main()
     }
     for (i = 0; i < len2; i++)
         printf("%c", name2[i]);
-    printf("\n");
     printf("\nremaing ships:%d", ships);
     for (i = 0; i <= 2 * n - 7; i++)
         printf(" ");

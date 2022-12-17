@@ -1,143 +1,32 @@
-#include <stdio.h>
-#include <string.h>
+ #include <stdio.h>
 
-void horizonal(int x, int y, char a[][30], int m)
-{
-    int i;
-    for (i = 0; i < m; i++)
-    {
-        a[x + i][y] = '*';
-    }
-}
-
-void vertical(int x, int y, char a[][30], int m)
-{
-    int i;
-    for (i = 0; i < m; i++)
-    {
-        a[x][y + i] = '*';
-    }
-}
-
-int main()
-{
-    int i, j, n, len1, len2, delta, ship;
-    scanf("%d", &n);
-    scanf("%d", &ship);
-    char p1[10];
-    int hit1[3][2];
-    scanf("%s", p1);
-    for (i = 0; i < 3; i++)
-    {
-        scanf("%d %d", &hit1[i][0], &hit1[i][1]);
-    }
-    char p2[10];
-    int hit2[3][2];
-    scanf("%s", p2);
-    for (i = 0; i < 3; i++)
-    {
-        scanf("%d %d", &hit2[i][0], &hit2[i][1]);
-    }
+ 
+ int main()
+ {
+    int i, j, n, len1, len2, delta, ships;
+    scanf("%d\n%d", &n, &ships);
+    char bin[4];
+    char ship1[ships][7];
+    char ship2[ships][7];
+    char name1[10];
+    char name2[10];
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
-    //---------------------------------------------------------------------------------//
-    for (i = 0; i < n + 1; i++) /*Grid for player 1 board*/
+    getchar();                                              
+    gets(name1);
+    for (i = 0; i <ships; i++)
     {
-        FOCP1[0][i] = i + 48;
-        FOCP1[i][0] = i + 48;
+        fgets(ship1[i],7,stdin);
     }
-    //--------------------------------------------------------------------------------//
-    for (i = 1; i < n + 1; i++) /*Filling the sea of player 1*/
-    {
-        for (j = 1; j < n + 1; j++)
-        {
-            FOCP1[i][j] = '~';
-        }
-    }
-    //--------------------------------------------------------------------------------//
-    for (i = 0; i < n + 1; i++) /*Grid for player 2 board*/
-    {
-        FOCP2[0][i] = i + 48;
-        FOCP2[i][0] = i + 48;
-    }
-    //--------------------------------------------------------------------------------//
-    for (i = 1; i < n + 1; i++) /*Filling the sea of player 2*/
-    {
-        for (j = 1; j < n + 1; j++)
-        {
-            FOCP2[i][j] = '~';
-        }
-    }
-    //--------------------------------------------------------------------------------//
-    for (i = 0; i < 3; i++)
-    {
-        FOCP1[hit1[i][0]][hit1[i][1]] = '*';
-    }
-    //--------------------------------------------------------------------------------//
-    for (i = 0; i < 3; i++)
-    {
-        FOCP2[hit2[i][0]][hit2[i][1]] = '*';
-    }
-    //--------------------------------------------------------------------------------//
-    len1 = strlen(p1); /*printing players'names*/
-    len2 = strlen(p2);
-    delta = len1 - len2;
-    for (i = 0; i < len1; i++)
-        printf("%c", p1[i]);
-    if (delta >= 0)
-    {
-        for (i = 0; i < (2 * n + 4) - delta; i++)
-            printf(" ");
-    }
-    else if (delta < 0)
-    {
-        for (i = 0; i < 2 * n + 4; i++)
-            printf(" ");
-    }
-    for (i = 0; i < len2; i++)
-        printf("%c", p2[i]);
     printf("\n");
-    //--------------------------------------------------------------------------------//
-    for (i = 0; i < n + 1; i++) /*Printing the boards*/
+    scanf("%s", bin);
+    printf("\n");
+    getchar();
+    gets(name2);
+    for (i = 0; i < ships; i++)
     {
-        for (j = 0; j < n + 1; j++)
-        {
-            if (i > 0 && j > 0)
-                printf("\033\e[0;34m");
-            if (FOCP1[i][j] == '~')
-                printf("≋ ", FOCP1[i][j]);
-            else if (FOCP1[i][j] == '*')
-            {
-                printf("\033\e[0;31m");
-                printf("* ", FOCP1[i][j]);
-                printf("\033[0m");
-            }
-            else if (FOCP1[i][j] == '0')
-                printf("  ", FOCP1[i][j]);
-            else
-                printf("%c ", FOCP1[i][j]);
-            printf("\033[0m");
-        }
-        printf("       ");
-        for (j = 0; j < n + 1; j++)
-        {
-            if (i > 0 && j > 0)
-                printf("\033\e[0;34m");
-            if (FOCP2[i][j] == '~')
-                printf("≋ ", FOCP2[i][j]);
-            else if (FOCP2[i][j] == '*')
-            {
-                printf("\033\e[0;31m");
-                printf("* ", FOCP2[i][j]);
-                printf("\033[0m");
-            }
-            else if (FOCP2[i][j] == '0')
-                printf("  ", FOCP2[i][j]);
-            else
-                printf("%c ", FOCP2[i][j]);
-            printf("\033[0m");
-        }
-        printf("\n");
+        fgets(ship2[i],7,stdin);
     }
-    return 0;
-}
+    printf("\n");
+    for (i=0;i<ships;i++) printf("%c\n",ship2[i][0]);
+ }

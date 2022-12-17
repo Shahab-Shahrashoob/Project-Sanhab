@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "sanhab": "c"
-    }
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
