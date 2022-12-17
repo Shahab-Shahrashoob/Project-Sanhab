@@ -18,46 +18,55 @@ void reset()
     printf("\033[0;m");
 }
 
-void horizonal(int x, int y, char a[][30], int m)
+void vertical(int y, int x, char a[][30], int m)
 {
     int i;
     for (i = 0; i < m; i++)
     {
-        a[x][y + i] = '+';
+        a[y][x + i] = '*';
     }
 }
 
-void vertical(int x, int y, char a[][30], int m)
+void horizonal(int y, int x, char a[][30], int m)
 {
     int i;
     for (i = 0; i < m; i++)
     {
-        a[x + i][y] = '+';
+        a[y + i][x] = '*';
     }
 }
 
 int main()
 {
-    int i, j, n, len1, len2, delta, ships;
-    scanf("%d", &n);
-    scanf("%d", &ships);
-    char bin[3];
-    char ship1[5][3];
-    char ship2[5][3];
+    int i, j, n, len1, len2, delta,ships;
+    scanf("%d\n%d", &n, &ships);
+    char bin[4];
+    char space[2]={' '};
+    char ship1[ships][7];
+    char ship2[ships][7];
     char name1[10];
     char name2[10];
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
     //---------------------------------------------------------------------------------//
-    scanf("%s",name1);                                       /*Scaning the coordinates*/
-    for(i=0;i<ships;i++){
-        scanf("%c %c %c",ship1[i][0],ship1[i][1],ship1[i][2]);
+    getchar();
+    gets(name1); 
+      printf("\n");                                    /*Scaning the coordinates*/                            
+    for (i = 0; i <ships; i++)
+    {
+        fgets(ship1[i],7,stdin);
     }
+    printf("\n"); 
     scanf("%s",bin);
+    printf("\n");
+    getchar();
     scanf("%s",name2);
-    for(i=0;i<ships;i++){
-        scanf("%c %c %c",ship2[i][0],ship2[i][1],ship2[i][2]);
-    }
+    printf("\n");
+    for (i = 0; i <= ships ; i++)
+    {
+       fgets(ship2[i],7,stdin);
+    } 
+    printf("\n");
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++)                              /*Grid for player 1 board*/
     {
@@ -87,18 +96,18 @@ int main()
         }
     }
     //--------------------------------------------------------------------------------//
-    for(i=0;i<ships;i++)
+    for (i = 0; i < ships; i++)
     {
-        if (ship1[i][4] == 'h')
+        if (ship1[i][5] == 'h')
             horizonal(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
-        else if (ship1[i][4] == 'v')
+        else if (ship1[i][5] == 'v')
             vertical(ship1[i][0] - 48, ship1[i][2] - 48, FOCP1, 3);
     }
-    for(i=0;i<ships;i++)
+    for (i = 0; i < ships; i++)
     {
-        if (ship2[i][4] == 'h')
+        if (ship2[i][5] == 'h')
             horizonal(ship2[i][0] - 48, ship2[i][2] - 48, FOCP2, 3);
-        else if (ship2[i][4] == 'v')
+        else if (ship2[i][5] == 'v')
             vertical(ship2[i][0] - 48, ship2[i][2] - 48, FOCP2, 3);
     }
 
