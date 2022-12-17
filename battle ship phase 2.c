@@ -3,15 +3,47 @@
 #include <conio.h>
 #include <stdlib.h>
 
+int placement_check(char a[],char board[][30],int n){
+    if(a[4]=='h'){
+        if (board[a[0]][a[2]]!='*'||board[a[0]][a[2]+1]!='*'||board[a[0]][a[2]+2]!='*'||a[0]<n-2||a[2]<n-2)return 0;
+        else return 1;
+    }
+    else if(a[4]=='v'){
+        if (board[a[0]][a[2]]!='*'||board[a[0]+1][a[2]]!='*'||board[a[0]+2][a[2]]!='*'||a[0]<n-2||a[2]<n-2)return 0;
+        else return 1;
+    }
+}
+
 void bold_blue()
 {
     printf("\033[1;34m");
 }
 
+void bold_green()
+{
+    printf("\033[1;32m");
+}
+
 void bold_red()
 {
-    printf("\033[0;31m");
+    printf("\033[1;31m");
 }
+
+void bold_yellow()
+{
+    printf("\033[1;33m");
+}
+
+void bold_magenta()
+{
+    printf("\033[1;35m");
+}
+
+void bold_cyan()
+{
+    printf("\033[1;36m");
+}
+
 
 void reset()
 {
@@ -35,6 +67,20 @@ int main()
     for (i = 0; i < ships; i++)
     {
         fgets(ship1[i], 7, stdin);
+        if(placement_check(ship1[i],FOCP1,n)==0){
+        x = ship1[i][0] - '0';
+        y = ship1[i][2] - '0';
+        if (ship1[i][4] == 'h')
+            for (k = 0; k < 3; k++)
+                FOCP1[x][y + k] = '*';
+        else if (ship1[i][4] == 'v')
+            for (k = 0; k < 3; k++)
+                FOCP1[x + k][y] = '*';
+        }
+        else if(placement_check(ship1[i],FOCP1,n)==-1){
+            printf("There is something blocking your ship . Please try again :\n");
+            i--;
+        }
     }
     printf("\n");
     scanf("%s", bin);
@@ -44,6 +90,20 @@ int main()
     for (i = 0; i < ships; i++)
     {
         fgets(ship2[i], 7, stdin);
+        if(placement_check(ship2[i],FOCP2,n)==0){
+        x = ship2[i][0] - '0';
+        y = ship2[i][2] - '0';
+        if (ship2[i][4] == 'h')
+            for (k = 0; k < 3; k++)
+                FOCP2[x][y + k] = '*';
+        else if (ship2[i][4] == 'v')
+            for (k = 0; k < 3; k++)
+                FOCP2[x + k][y] = '*';
+        }
+        else if(placement_check(ship2[i],FOCP2,n)==1){
+            printf("There is something blocking your ship . Please try again :\n");
+            i--;
+        }
     }
     printf("\n");
     //---------------------------------------------------------------------------------//
@@ -57,7 +117,7 @@ int main()
     {
         for (j = 1; j < n + 1; j++)
         {
-            FOCP1[i][j] = '~';
+            if(FOCP1[i][j]!='*')FOCP1[i][j] = '~';
         }
     }
     //--------------------------------------------------------------------------------//
@@ -71,33 +131,9 @@ int main()
     {
         for (j = 1; j < n + 1; j++)
         {
-            FOCP2[i][j] = '~';
+            if(FOCP2[i][j]!='*')FOCP2[i][j] = '~';
         }
     }
-    //--------------------------------------------------------------------------------//
-    for (i = 0; i < ships; i++)
-    {
-        x = ship1[i][0] - '0';
-        y = ship1[i][2] - '0';
-        if (ship1[i][4] == 'h')
-            for (k = 0; k < 3; k++)
-                FOCP1[x][y + k] = '*';
-        else if (ship1[i][4] == 'v')
-            for (k = 0; k < 3; k++)
-                FOCP1[x + k][y] = '*';
-    }
-    for (i = 0; i < ships; i++)
-    {
-        x = ship2[i][0] - '0';
-        y = ship2[i][2] - '0';
-        if (ship2[i][4] == 'h')
-            for (k = 0; k < 3; k++)
-                FOCP2[x][y + k] = '*';
-        else if (ship2[i][4] == 'v')
-            for (k = 0; k < 3; k++)
-                FOCP2[x + k][y] = '*';
-    }
-
     //--------------------------------------------------------------------------------//
     len1 = strlen(name1); /*printing players'names*/
     len2 = strlen(name2);
@@ -135,8 +171,8 @@ int main()
                 }
                 else if (FOCP1[i][j] == '*')
                 {
-                    bold_red();
-                    printf("☼ ", FOCP1[i][j]);
+                    bold_green();
+                    printf("♆ ", FOCP1[i][j]);
                     reset();
                 }
             }
@@ -163,8 +199,8 @@ int main()
                 }
                 else if (FOCP2[i][j] == '*')
                 {
-                    bold_red();
-                    printf("☼ ", FOCP2[i][j]);
+                    bold_green();
+                    printf("♆ ", FOCP2[i][j]);
                     reset();
                 }
             }
