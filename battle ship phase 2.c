@@ -48,21 +48,22 @@ int main()
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
     //---------------------------------------------------------------------------------//
-    /*Scaning the coordinates*/
+    getchar();                                              /*Scaning the coordinates*/
     gets(name1);
     printf("\n");
-    for (i = 0; i < ships; i++)
+    for (i = 0; i <ships; i++)
     {
-        fgets(ship1[i], 7, stdin);
+        fgets(ship1[i],7,stdin);
     }
     printf("\n");
     scanf("%s", bin);
     printf("\n");
-    scanf("%s", name2);
+    getchar();
+    gets(name2);
     printf("\n");
-    for (i = 0; i <= ships; i++)
+    for (i = 0; i < ships; i++)
     {
-        fgets(ship2[i], 7, stdin);
+        fgets(ship2[i],7,stdin);
     }
     printf("\n");
     //---------------------------------------------------------------------------------//
