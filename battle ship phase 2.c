@@ -23,7 +23,7 @@ void vertical(int y, int x, char a[][30], int m)
     int i;
     for (i = 0; i < m; i++)
     {
-        a[y][x + i] = '*';
+        a[y][x  + i] = '*';
     }
 }
 
@@ -38,10 +38,9 @@ void horizonal(int y, int x, char a[][30], int m)
 
 int main()
 {
-    int i, j, n, len1, len2, delta,ships;
+    int i, j, n, len1, len2, delta, ships;
     scanf("%d\n%d", &n, &ships);
     char bin[4];
-    char space[2]={' '};
     char ship1[ships][7];
     char ship2[ships][7];
     char name1[10];
@@ -49,32 +48,31 @@ int main()
     char FOCP1[n + 1][n + 1];
     char FOCP2[n + 1][n + 1];
     //---------------------------------------------------------------------------------//
-    getchar();
-    gets(name1); 
-      printf("\n");                                    /*Scaning the coordinates*/                            
-    for (i = 0; i <ships; i++)
+    /*Scaning the coordinates*/
+    gets(name1);
+    printf("\n");
+    for (i = 0; i < ships; i++)
     {
-        fgets(ship1[i],7,stdin);
+        fgets(ship1[i], 7, stdin);
     }
-    printf("\n"); 
-    scanf("%s",bin);
     printf("\n");
-    getchar();
-    scanf("%s",name2);
+    scanf("%s", bin);
     printf("\n");
-    for (i = 0; i <= ships ; i++)
+    scanf("%s", name2);
+    printf("\n");
+    for (i = 0; i <= ships; i++)
     {
-       fgets(ship2[i],7,stdin);
-    } 
+        fgets(ship2[i], 7, stdin);
+    }
     printf("\n");
     //---------------------------------------------------------------------------------//
-    for (i = 0; i < n + 1; i++)                              /*Grid for player 1 board*/
+    for (i = 0; i < n + 1; i++) /*Grid for player 1 board*/
     {
         FOCP1[0][i] = i + 48;
         FOCP1[i][0] = i + 48;
     }
     //--------------------------------------------------------------------------------//
-    for (i = 1; i < n + 1; i++)                         /*Filling the sea of player 1*/
+    for (i = 1; i < n + 1; i++) /*Filling the sea of player 1*/
     {
         for (j = 1; j < n + 1; j++)
         {
@@ -82,13 +80,13 @@ int main()
         }
     }
     //--------------------------------------------------------------------------------//
-    for (i = 0; i < n + 1; i++)                             /*Grid for player 2 board*/
+    for (i = 0; i < n + 1; i++) /*Grid for player 2 board*/
     {
         FOCP2[0][i] = i + 48;
         FOCP2[i][0] = i + 48;
     }
     //--------------------------------------------------------------------------------//
-    for (i = 1; i < n + 1; i++)                         /*Filling the sea of player 2*/
+    for (i = 1; i < n + 1; i++) /*Filling the sea of player 2*/
     {
         for (j = 1; j < n + 1; j++)
         {
