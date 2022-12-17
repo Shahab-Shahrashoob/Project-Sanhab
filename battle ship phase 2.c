@@ -20,7 +20,7 @@ void reset()
 
 int main()
 {
-    int i, j,k,x,y, n, len1, len2, delta, ships;
+    int i, j, k, x, y, n, len1, len2, delta, ships;
     scanf("%d\n%d", &n, &ships);
     char bin[4];
     char ship1[ships][7];
@@ -77,25 +77,25 @@ int main()
     //--------------------------------------------------------------------------------//
     for (i = 0; i < ships; i++)
     {
-        x=ship1[i][0]-'0';
-        y=ship1[i][2]-'0';
+        x = ship1[i][0] - '0';
+        y = ship1[i][2] - '0';
         if (ship1[i][4] == 'h')
             for (k = 0; k < 3; k++)
-                FOCP1[x][y+k] = '*';
+                FOCP1[x][y + k] = '*';
         else if (ship1[i][4] == 'v')
             for (k = 0; k < 3; k++)
-                FOCP1[x+k][y] = '*';
+                FOCP1[x + k][y] = '*';
     }
     for (i = 0; i < ships; i++)
     {
-        x=ship2[i][0]-'0';
-        y=ship2[i][2]-'0';
+        x = ship2[i][0] - '0';
+        y = ship2[i][2] - '0';
         if (ship2[i][4] == 'h')
             for (k = 0; k < 3; k++)
-                FOCP2[x][y+k] = '*';
+                FOCP2[x][y + k] = '*';
         else if (ship2[i][4] == 'v')
             for (k = 0; k < 3; k++)
-                FOCP2[x+k][y] = '*';
+                FOCP2[x + k][y] = '*';
     }
 
     //--------------------------------------------------------------------------------//
