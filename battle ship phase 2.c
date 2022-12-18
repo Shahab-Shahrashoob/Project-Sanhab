@@ -2,6 +2,7 @@
 #include <string.h>
 #include <conio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 char FOCP1[21][21];
 char FOCP2[21][21];
@@ -118,6 +119,7 @@ int main()
         else if (j == 1)
         {
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
+            Beep(1000,1000);
             i--;
         }
     }
@@ -142,6 +144,7 @@ int main()
         else if (j == 1)
         {
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
+            Beep(1000,1000);
             i--;
         }
     }
