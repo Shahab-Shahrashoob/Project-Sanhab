@@ -240,7 +240,7 @@ int main()
                 }
                 else if (FOCP2[i][j] == '*')
                 {
-                    bold_cyan();
+                    bold_green();
                     printf("♆ ", FOCP2[i][j]);
                     reset();
                 }
