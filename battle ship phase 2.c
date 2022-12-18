@@ -71,8 +71,8 @@ int main()
     char bin[4];
     char ship1[ships][7];
     char ship2[ships][7];
-    char name1[10];
-    char name2[10];
+    char name1[20];
+    char name2[20];
     //---------------------------------------------------------------------------------//
     getchar(); /*Scaning the coordinates*/
     printf("Player 1's name :\n\n");
@@ -93,7 +93,7 @@ int main()
                 FOCP1[x + k][y] = '*';
         }
         else if(j==1){
-            printf("\nThere is something blocking your ship commander . Please try another coordinates :\n");
+            printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
             i--;
         }
     }
@@ -118,7 +118,7 @@ int main()
                 FOCP2[x + k][y] = '*';
         }
         else if(j==1){
-            printf("\nThere is something blocking your ship commander . Please try another coordinates :\n");
+            printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
             i--;
         }
     }
@@ -155,8 +155,7 @@ int main()
     len1 = strlen(name1); /*printing players'names*/
     len2 = strlen(name2);
     delta = len1 - len2;
-    for (i = 0; i < len1; i++)
-        printf("%c", name1[i]);
+    printf("%s",name1);
     if (delta >= 0)
     {
         for (i = 0; i < (2 * n + 4) - delta; i++)
@@ -167,8 +166,7 @@ int main()
         for (i = 0; i < 2 * n + 4; i++)
             printf(" ");
     }
-    for (i = 0; i < len2; i++)
-        printf("%c", name2[i]);
+    printf("%s",name2);
     printf("\nremaing ships:%d", ships);
     for (i = 0; i <= 2 * n - 7; i++)
         printf(" ");
