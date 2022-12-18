@@ -120,7 +120,6 @@ int main()
         {
             Beep(1000,500);
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
-            Beep(1000,1000);
             i--;
         }
     }
@@ -146,7 +145,6 @@ int main()
         {
             Beep(1000,500);
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
-            Beep(1000,1000);
             i--;
         }
     }
