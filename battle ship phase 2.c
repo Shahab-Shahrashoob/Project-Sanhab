@@ -67,7 +67,10 @@ void reset()
 int main()
 {
     int i, j, k, sw, x, y, n, len1, len2, delta, ships;
-    scanf("%d\n%d", &n, &ships);
+    printf("Board size : ");
+    scanf("%d", &n);
+    printf("Number of ships : ");
+    scanf("%d",&ships);
     char bin[4];
     char ship1[ships][7];
     char ship2[ships][7];
