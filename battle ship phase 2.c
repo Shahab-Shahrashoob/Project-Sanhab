@@ -64,6 +64,12 @@ void reset()
     printf("\033[0;m");
 }
 
+
+void clrscr()
+{
+    printf("\e[1;1H\e[2J");
+}
+
 int main()
 {
     int i, j, k, sw, x, y, n, len1, len2, delta, ships;
@@ -126,6 +132,7 @@ int main()
         }
     }
     printf("\n");
+    clrscr();
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1 FOCP*/
     {
