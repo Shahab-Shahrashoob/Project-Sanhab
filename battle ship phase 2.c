@@ -118,7 +118,7 @@ int main()
         }
         else if (j == 1)
         {
-            Beep(950,500);
+            Beep(1000,500);
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
             i--;
         }
@@ -143,7 +143,7 @@ int main()
         }
         else if (j == 1)
         {
-            Beep(950,500);
+            Beep(1000,500);
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
             i--;
         }
