@@ -163,42 +163,6 @@ void credits(){
     printf("Shahab Shahrashoob\n\n");
 }
 
-int easter(){
-    int i,j;
-    i=j=0;
-    if(strcmp(name1,"sania")==0||strcmp(name2,"sania")==0||strcmp(name1,"Sania")==0||strcmp(name2,"Sania")==0||strcmp(name1,"$ania")==0||strcmp(name2,"$ania")==0)i=1;
-    if(strcmp(name1,"shahab")==0||strcmp(name2,"shahab")==0||strcmp(name1,"Shahab")==0||strcmp(name2,"Shahab")==0||strcmp(name1,"ShahabDeKiller")==0||strcmp(name2,"ShahabDeKiller")==0)j=1;
-    if(i==1&&j==1){
-        printf("\n\n\n\nDear Players...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\n\n\nWho do you think you are...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\n\n\nthat you are trying to put shahab and sania...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\n\n\nagainst each other...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\n\n\nThey are allies...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\n\n\nand always will be...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\n\n\nNothing can put them against each other...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\n\n\nEven this game...");
-        Sleep(2500);
-        clrscr();
-        printf("\n\nEnding : Allies 4ever\n\n");
-        return 1;
-    }
-    return 0;
-}
-
 void printing1(int n)
 {
     int i, j;
@@ -351,7 +315,6 @@ int main()
     }
     printf("\n");
     clrscr();
-    if(easter()==1)return 0;
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1*/
     {
