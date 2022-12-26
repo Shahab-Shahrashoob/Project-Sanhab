@@ -157,10 +157,27 @@ void attack2(char a[], int n)
 
 void credits(){
     printf("\n\nPresented to you by\n\n");
-    Sleep(2500);
+    Sleep(2000);
     printf("$ania Dolat\n\n");
-    Sleep(2500);
+    Sleep(2000);
     printf("Shahab Shahrashoob\n\n");
+    Sleep(2000);
+    printf("Special thanks to\n\n");
+    Sleep(2000);
+    printf("Tahoora Saeedi\n\n");
+    Sleep(4000);
+}
+
+void intro(){
+    printf("\n\n\nWelcome");
+    Sleep(1500);
+    clrscr();
+    printf("to project $anhab");
+    Sleep(1500);
+    clrscr();
+    printf("Enjoy the game");
+    Sleep(1500);
+    clrscr();
 }
 
 void printing1(int n)
@@ -189,7 +206,7 @@ void printing1(int n)
                     bold_green();
                     printf("O ", FOCP1[i][j]);
                     RESET();
-                    FOCP2[i][j] = '~';
+                    /*FOCP2[i][j] = '~';*/
                 }
             }
             if (FOCP2[i][j] == '0')
@@ -230,7 +247,7 @@ int easter(){
         printf("\n\n\n\nso...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr. ");
+        printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr.DeKiller ");
         Sleep(2500);
         clrscr();
         printf("\n\n\n\nEnding #1 : Allies 4ever\n\n\n");
@@ -265,7 +282,7 @@ void printing2(int n)
                     bold_green();
                     printf("O ", FOCP1[i][j]);
                     RESET();
-                    FOCP1[i][j] = '~';
+                    /*FOCP1[i][j] = '~';*/
                 }
             }
             if (FOCP1[i][j] == '0')
@@ -285,6 +302,7 @@ void printing2(int n)
 int main()
 {
     clrscr();
+    intro();
     int i, j, k, sw, x, y, n, len1, len2, delta, ships;
     printf("Board size : ");
     scanf("%d", &n);
@@ -295,6 +313,10 @@ int main()
     char ship2[ships][7];
     //---------------------------------------------------------------------------------//
     getchar(); /*Scaning the coordinates*/
+    clrscr();
+    printf("\nOnly player 1 can see this page");
+    Sleep(3000);
+    clrscr();
     printf("\nPlayer 1's name :\n\n");
     gets(name1);
     printf("\nPlease enter your ships coordinates commander %s :\n\n", name1);
@@ -320,6 +342,9 @@ int main()
             i--;
         }
     }
+    clrscr();
+    printf("\nOnly player 2 can see this page");
+    Sleep(3000);
     clrscr();
     printf("\nPlayer 2's name :\n\n");
     gets(name2);
@@ -412,6 +437,6 @@ int main()
         printf("\nCommander %s Won\n\n\n", name2);
     Sleep(2500);
     clrscr();
-    credits();
+    /*credits();*/
     return 0;
 }
