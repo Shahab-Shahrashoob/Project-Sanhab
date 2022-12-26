@@ -206,7 +206,7 @@ void printing1(int n)
     }
 }
 
-void easter(){
+int easter(){
     int i,j;
     i=j=0;
     if(strcmp(name1,"sania")==0||strcmp(name2,"sania")==0||strcmp(name1,"Sania")==0||strcmp(name2,"Sania")==0||strcmp(name1,"$ania")==0||strcmp(name2,"$ania")==0)i=1;
@@ -221,17 +221,22 @@ void easter(){
         printf("\n\n\n\nabout shahab and sania...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nthat they always draw...");
+        printf("\n\n\n\nThey are allies...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nso this match is gonna be interesting...");
+        printf("\n\n\n\nyou can't put allies against each other...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nlet's see who wins this time...");
+        printf("\n\n\n\nso...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nLets go...");
+        printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr. ");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nEnding #1 : Allies 4ever\n\n\n");
+        return 1;
     }
+    return 0;
 }
 
 void printing2(int n)
@@ -343,7 +348,7 @@ int main()
     }
     printf("\n");
     clrscr();
-    easter();
+    if(easter()==1)return 0;
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1*/
     {
