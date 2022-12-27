@@ -155,27 +155,14 @@ void attack2(char a[], int n)
         FOCP1[x][y] = 'O';
 }
 
-void credits(){
-    printf("\n\nPresented to you by\n\n");
-    Sleep(2000);
-    printf("$ania Dolat\n\n");
-    Sleep(2000);
-    printf("Shahab Shahrashoob\n\n");
-    Sleep(2000);
-    printf("Special thanks to\n\n");
-    Sleep(2000);
-    printf("Tahoora Saeedi\n\n");
-    Sleep(4000);
-}
-
 void intro(){
     printf("\n\n\nWelcome");
     Sleep(1500);
     clrscr();
-    printf("to project $anhab");
+    printf("\n\n\nto project $anhab");
     Sleep(1500);
     clrscr();
-    printf("Enjoy the game");
+    printf("\n\n\nEnjoy the game");
     Sleep(1500);
     clrscr();
 }
@@ -437,6 +424,5 @@ int main()
         printf("\nCommander %s Won\n\n\n", name2);
     Sleep(2500);
     clrscr();
-    /*credits();*/
     return 0;
 }
