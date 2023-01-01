@@ -155,12 +155,16 @@ void attack2(char a[], int n)
         FOCP1[x][y] = 'O';
 }
 
-void credits(){
-    printf("\n\nPresented to you by\n\n");
-    Sleep(2500);
-    printf("$ania Dolat\n\n");
-    Sleep(2500);
-    printf("Shahab Shahrashoob\n\n");
+void intro(){
+    printf("\n\n\nWelcome");
+    Sleep(1500);
+    clrscr();
+    printf("\n\n\nto project $anhab");
+    Sleep(1500);
+    clrscr();
+    printf("\n\n\nEnjoy the game");
+    Sleep(1500);
+    clrscr();
 }
 
 void printing1(int n)
@@ -189,7 +193,7 @@ void printing1(int n)
                     bold_green();
                     printf("O ", FOCP1[i][j]);
                     RESET();
-                    FOCP2[i][j] = '~';
+                    /*FOCP2[i][j] = '~';*/
                 }
             }
             if (FOCP2[i][j] == '0')
@@ -206,7 +210,7 @@ void printing1(int n)
     }
 }
 
-void easter(){
+int easter(){
     int i,j;
     i=j=0;
     if(strcmp(name1,"sania")==0||strcmp(name2,"sania")==0||strcmp(name1,"Sania")==0||strcmp(name2,"Sania")==0||strcmp(name1,"$ania")==0||strcmp(name2,"$ania")==0)i=1;
@@ -221,17 +225,22 @@ void easter(){
         printf("\n\n\n\nabout shahab and sania...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nthat they always draw...");
+        printf("\n\n\n\nThey are allies...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nso this match is gonna be interesting...");
+        printf("\n\n\n\nyou can't put allies against each other...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nlet's see who wins this time...");
+        printf("\n\n\n\nso...");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nLets go...");
+        printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr.DeKiller ");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nEnding #1 : Allies 4ever\n\n\n");
+        return 1;
     }
+    return 0;
 }
 
 void printing2(int n)
@@ -260,7 +269,7 @@ void printing2(int n)
                     bold_green();
                     printf("O ", FOCP1[i][j]);
                     RESET();
-                    FOCP1[i][j] = '~';
+                    /*FOCP1[i][j] = '~';*/
                 }
             }
             if (FOCP1[i][j] == '0')
@@ -280,6 +289,7 @@ void printing2(int n)
 int main()
 {
     clrscr();
+    intro();
     int i, j, k, sw, x, y, n, len1, len2, delta, ships;
     printf("Board size : ");
     scanf("%d", &n);
@@ -290,6 +300,10 @@ int main()
     char ship2[ships][7];
     //---------------------------------------------------------------------------------//
     getchar(); /*Scaning the coordinates*/
+    clrscr();
+    printf("\nOnly player 1 can see this page");
+    Sleep(3000);
+    clrscr();
     printf("\nPlayer 1's name :\n\n");
     gets(name1);
     printf("\nPlease enter your ships coordinates commander %s :\n\n", name1);
@@ -315,6 +329,9 @@ int main()
             i--;
         }
     }
+    clrscr();
+    printf("\nOnly player 2 can see this page");
+    Sleep(3000);
     clrscr();
     printf("\nPlayer 2's name :\n\n");
     gets(name2);
@@ -343,7 +360,7 @@ int main()
     }
     printf("\n");
     clrscr();
-    easter();
+    if(easter()==1)return 0;
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1*/
     {
@@ -407,6 +424,5 @@ int main()
         printf("\nCommander %s Won\n\n\n", name2);
     Sleep(2500);
     clrscr();
-    credits();
     return 0;
 }
