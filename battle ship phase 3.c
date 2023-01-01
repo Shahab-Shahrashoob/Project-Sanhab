@@ -6,8 +6,8 @@
 
 char FOCP1[21][21];
 char FOCP2[21][21];
-
-
+char name1[20];
+char name2[20];
 
 void bold_blue()
 {
@@ -48,6 +48,55 @@ void clrscr()
 {
     printf("\e[1;1H\e[2J");
 }
+void intro()
+{
+    printf("\n\n\nWelcome");
+    Sleep(1500);
+    clrscr();
+    printf("\n\n\nto project $anhab");
+    Sleep(1500);
+    clrscr();
+    printf("\n\n\nEnjoy the game");
+    Sleep(1500);
+    clrscr();
+}
+
+int easter()
+{
+    int i, j;
+    i = j = 0;
+    if (strcmp(name1, "$ania") == 0 || strcmp(name2, "$ania") == 0)
+        i = 1;
+    if (strcmp(name1, "ShahabDeKiller") == 0 || strcmp(name2, "ShahabDeKiller") == 0)
+        j = 1;
+    if (i == 1 && j == 1)
+    {
+        printf("\n\n\n\nDear Players...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nYou should know something...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nabout shahab and sania...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nThey are allies...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nyou can't put allies against each other...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nso...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr.DeKiller ");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nEnding #1 : Allies 4ever\n\n\n");
+        return 1;
+    }
+    return 0;
+}
 
 int placement_check1(char a, char b, char c, int n)
 {
@@ -84,7 +133,6 @@ int placement_check2(char a, char b, char c, int n)
             return 0;
     }
 }
-
 
 void board1(int n)
 {
@@ -219,9 +267,9 @@ int main()
     char bin[4];
     char ship1[ships][7];
     char ship2[ships][7];
-    char name1[20];
-    char name2[20];
     //---------------------------------------------------------------------------------//
+    intro();
+    clrscr();
     getchar(); /*Scaning the coordinates*/
     printf("\nPlayer 1's name :\n\n");
     gets(name1);
@@ -275,6 +323,8 @@ int main()
     }
     printf("\n");
     clrscr();
+    if (easter() == 0)
+        return 0;
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1*/
     {
@@ -316,7 +366,7 @@ int main()
         {
             Beep(1000, 500);
             printf("\nOut of bounds . Please try again :\n");
-            scanf("%d %d",&x,&y);
+            scanf("%d %d", &x, &y);
         }
         put2(x, y, n);
         clrscr();
@@ -350,5 +400,4 @@ int main()
         printf("commander %s won", name2);
     else if (bcount == 0)
         printf("commander %s won", name1);
-   
 }
