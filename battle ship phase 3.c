@@ -48,6 +48,7 @@ void clrscr()
 {
     printf("\e[1;1H\e[2J");
 }
+
 void intro()
 {
     printf("\n\n\nWelcome");
@@ -259,6 +260,7 @@ void put2(int x, int y, int n)
 int main()
 {
     clrscr();
+    intro();
     int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount;
     printf("Board size : ");
     scanf("%d", &n);
@@ -268,7 +270,6 @@ int main()
     char ship1[ships][7];
     char ship2[ships][7];
     //---------------------------------------------------------------------------------//
-    intro();
     clrscr();
     getchar(); /*Scaning the coordinates*/
     printf("\nPlayer 1's name :\n\n");
