@@ -6,42 +6,8 @@
 
 char FOCP1[21][21];
 char FOCP2[21][21];
-
-int placement_check1(char a, char b, char c, int n)
-{
-    if (c == 'h')
-    {
-        if (FOCP1[a - 48][b - 48] == '^' || FOCP1[a - 48][b - 47] == '^' || FOCP1[a - 48][b - 46] == '^' || a - 48 > n || b - 48 > n - 2)
-            return 1;
-        else
-            return 0;
-    }
-    if (c == 'v')
-    {
-        if (FOCP1[a - 48][b - 48] == '^' || FOCP1[a - 47][b - 48] == '^' || FOCP1[a - 46][b - 48] == '^' || a - 48 > n - 2 || b - 48 > n)
-            return 1;
-        else
-            return 0;
-    }
-}
-
-int placement_check2(char a, char b, char c, int n)
-{
-    if (c == 'h')
-    {
-        if (FOCP2[a - 48][b - 48] == '^' || FOCP2[a - 48][b - 47] == '^' || FOCP2[a - 48][b - 46] == '^' || a - 48 > n - 2 || b - 48 > n - 2)
-            return 1;
-        else
-            return 0;
-    }
-    if (c == 'v')
-    {
-        if (FOCP2[a - 48][b - 48] == '^' || FOCP2[a - 47][b - 48] == '^' || FOCP2[a - 46][b - 48] == '^' || a - 48 > n - 2 || b - 48 > n - 2)
-            return 1;
-        else
-            return 0;
-    }
-}
+char name1[20];
+char name2[20];
 
 void bold_blue()
 {
@@ -83,70 +49,218 @@ void clrscr()
     printf("\e[1;1H\e[2J");
 }
 
+void intro()
+{
+    printf("\n\n\nWelcome");
+    Sleep(1500);
+    clrscr();
+    printf("\n\n\nto project $anhab");
+    Sleep(1500);
+    clrscr();
+    printf("\n\n\nEnjoy the game");
+    Sleep(1500);
+    clrscr();
+}
+
+int easter()
+{
+    int i, j;
+    i = j = 0;
+    if (strcmp(name1, "$ania") == 0 || strcmp(name2, "$ania") == 0)
+        i = 1;
+    if (strcmp(name1, "ShahabDeKiller") == 0 || strcmp(name2, "ShahabDeKiller") == 0)
+        j = 1;
+    if (i == 1 && j == 1)
+    {
+        printf("\n\n\n\nDear Players...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nYou should know something...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nabout shahab and sania...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nThey are allies...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nyou can't put allies against each other...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nso...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr.DeKiller ");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nEnding #1 : Allies 4ever\n\n\n");
+        return 1;
+    }
+    return 0;
+}
+
+int placement_check1(char a, char b, char c, int n)
+{
+    if (c == 'h')
+    {
+        if (FOCP1[a - 48][b - 48] == '^' || FOCP1[a - 48][b - 47] == '^' || FOCP1[a - 48][b - 46] == '^' || a - 48 > n || b - 48 > n - 2)
+            return 1;
+        else
+            return 0;
+    }
+    if (c == 'v')
+    {
+        if (FOCP1[a - 48][b - 48] == '^' || FOCP1[a - 47][b - 48] == '^' || FOCP1[a - 46][b - 48] == '^' || a - 48 > n - 2 || b - 48 > n)
+            return 1;
+        else
+            return 0;
+    }
+}
+
+int placement_check2(char a, char b, char c, int n)
+{
+    if (c == 'h')
+    {
+        if (FOCP2[a - 48][b - 48] == '^' || FOCP2[a - 48][b - 47] == '^' || FOCP2[a - 48][b - 46] == '^' || a - 48 > n - 2 || b - 48 > n - 2)
+            return 1;
+        else
+            return 0;
+    }
+    if (c == 'v')
+    {
+        if (FOCP2[a - 48][b - 48] == '^' || FOCP2[a - 47][b - 48] == '^' || FOCP2[a - 46][b - 48] == '^' || a - 48 > n - 2 || b - 48 > n - 2)
+            return 1;
+        else
+            return 0;
+    }
+}
+
+void board1(int n)
+{
+    int i, j;
+    for (i = 0; i < n + 1; i++)
+    {
+        for (j = 0; j < n + 1; j++)
+        {
+            if (i > 0 && j > 0)
+            {
+                if (FOCP1[i][j] == '~')
+                {
+                    bold_blue();
+                    printf("≋ ", FOCP1[i][j]);
+                    reset();
+                }
+                else if (FOCP1[i][j] == '^')
+                {
+                    bold_blue();
+                    printf("≋ ", FOCP2[i][j]);
+                    reset();
+                }
+                else if (FOCP1[i][j] == 'o')
+                {
+                    bold_green();
+                    printf("o ", FOCP1[i][j]);
+                    FOCP1[i][j] = '~';
+                    reset();
+                }
+                else if (FOCP1[i][j] == '*')
+                {
+                    bold_red();
+                    printf("☼ ", FOCP1[i][j]);
+                    reset();
+                }
+            }
+            if (FOCP1[i][j] == '0')
+                printf("  ", FOCP1[i][j]);
+            else if (i == 0 || j == 0)
+            {
+                if (i == 0)
+                    printf("%d ", j);
+                if (j == 0)
+                    printf("%d ", i);
+            }
+        }
+        printf("\n");
+    }
+}
+
 void board2(int n)
 {
     int i, j;
-  for (i = 0; i < n + 1; i++)
+    for (i = 0; i < n + 1; i++)
+    {
+        for (j = 0; j < n + 1; j++)
         {
-            for (j = 0; j < n + 1; j++)
+            if (i > 0 && j > 0)
             {
-                if (i > 0 && j > 0)
+                if (FOCP2[i][j] == '~')
                 {
-                    if (FOCP2[i][j] == '~')
-                    {
-                        bold_blue();
-                        printf("≋ ", FOCP2[i][j]);
-                        reset();
-                    }
-                    else if (FOCP2[i][j] == '^')
-                    {
-                        bold_blue();
-                        printf("≋ ", FOCP2[i][j]);
-                        reset();
-                    }
-                    else if(FOCP2[i][j]=='o')
-                    {
-                        bold_green();
-                        printf("o ",FOCP2[i][j]);
-                        FOCP2[i][j]='~';
-                        reset();
-                    }
-                    else if(FOCP2[i][j]=='*')
-                    {
-                        bold_red();
-                        printf("* ",FOCP2[i][j]);
-                        reset();
-                    }
+                    bold_blue();
+                    printf("≋ ", FOCP2[i][j]);
+                    reset();
                 }
-                if (FOCP2[i][j] == '0')
-                    printf("  ", FOCP2[i][j]);
-                else if (i == 0 || j == 0)
+                else if (FOCP2[i][j] == '^')
                 {
-                    if (i == 0)
-                        printf("%d ", j);
-                    if (j == 0)
-                        printf("%d ", i);
+                    bold_blue();
+                    printf("≋ ", FOCP2[i][j]);
+                    reset();
+                }
+                else if (FOCP2[i][j] == 'o')
+                {
+                    bold_green();
+                    printf("o ", FOCP2[i][j]);
+                    FOCP2[i][j] = '~';
+                    reset();
+                }
+                else if (FOCP2[i][j] == '*')
+                {
+                    bold_red();
+                    printf("☼ ", FOCP2[i][j]);
+                    reset();
                 }
             }
-            printf("\n");
+            if (FOCP2[i][j] == '0')
+                printf("  ", FOCP2[i][j]);
+            else if (i == 0 || j == 0)
+            {
+                if (i == 0)
+                    printf("%d ", j);
+                if (j == 0)
+                    printf("%d ", i);
+            }
         }
+        printf("\n");
+    }
+}
+
+void put1(int x, int y, int n)
+{
+    if (FOCP1[x][y] == '~')
+    {
+        FOCP1[x][y] = 'o';
+    }
+    else if (FOCP1[x][y] == '^')
+    {
+        FOCP1[x][y] = '*';
+    }
 }
 
 void put2(int x, int y, int n)
 {
     if (FOCP2[x][y] == '~')
     {
-        FOCP2[x][y]='o';
+        FOCP2[x][y] = 'o';
     }
     else if (FOCP2[x][y] == '^')
     {
-        FOCP2[x][y]='*';
+        FOCP2[x][y] = '*';
     }
 }
 
 int main()
 {
     clrscr();
+    intro();
     int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount;
     printf("Board size : ");
     scanf("%d", &n);
@@ -155,9 +269,8 @@ int main()
     char bin[4];
     char ship1[ships][7];
     char ship2[ships][7];
-    char name1[20];
-    char name2[20];
     //---------------------------------------------------------------------------------//
+    clrscr();
     getchar(); /*Scaning the coordinates*/
     printf("\nPlayer 1's name :\n\n");
     gets(name1);
@@ -211,6 +324,8 @@ int main()
     }
     printf("\n");
     clrscr();
+    if (easter() == 0)
+        return 0;
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1*/
     {
@@ -242,102 +357,48 @@ int main()
         }
     }
     //-------------------------------------------------------------------------------//
-    acount = bcount = ships * 3;
-    while (acount != 0 && bcount != 0)
+    acount = bcount = ships * 3; /*Attack*/
+    for (; acount != 0 && bcount != 0;)
     {
         board2(n);
-        printf("\nattack commander %s\n\n", name1);
+        printf("\ncommander %s's attack\n\n", name1);
         scanf("%d %d", &x, &y);
+        if (x > n || y > n)
+        {
+            Beep(1000, 500);
+            printf("\nOut of bounds . Please try again :\n");
+            scanf("%d %d", &x, &y);
+        }
         put2(x, y, n);
+        clrscr();
         board2(n);
-        if(FOCP2[x][y]=='*') bcount--;
-        printf("%d\n",bcount);
+        if (FOCP2[x][y] == '*')
+            bcount--;
+        if (bcount == 0)
+            break;
         Sleep(2500);
         clrscr();
-        /*board1(n);
-        printf("attack commander %s\n",name2);
-        scanf("%d %d",&x,&y);
-        put2(x,y,n,FOCP1);*/
-    }
-    //--------------------------------------------------------------------------------//
-    /*len1 = strlen(name1); /*printing players'names*/
-    /*len2 = strlen(name2);
-    delta = len1 - len2;
-    printf("%s", name1);
-    if (delta >= 0)
-    {
-        for (i = 0; i < (2 ^ n + 4) - delta; i++)
-            printf(" ");
-    }
-    else if (delta < 0)
-    {
-        for (i = 0; i < 2 ^ n + 4; i++)
-            printf(" ");
-    }
-    printf("%s", name2);
-    printf("\nremaing ships:%d", ships);
-    for (i = 0; i <= 2 ^ n - 7; i++)
-        printf(" ");
-    printf("remaing ships:%d\n\n", ships);*/
-    //--------------------------------------------------------------------------------//
-    /*for (i=0;i<n+1;i++) /*Printing the Boards*/
-    /*{
-        for (j = 0; j < n + 1; j++)
+        board1(n);
+        printf("\ncommander %s's attack\n\n", name2);
+        scanf("%d %d", &x, &y);
+        if (x > n || y > n)
         {
-            if (i > 0 && j > 0)
-            {
-                if (FOCP1[i][j] == '~')
-                {
-                    bold_blue();
-                    printf("≋ ", FOCP1[i][j]);
-                    reset();
-                }
-                else if (FOCP1[i][j] == '^')
-                {
-                    bold_yellow();
-                    printf("♆ ", FOCP1[i][j]);
-                    reset();
-                }
-            }
-            if (FOCP1[i][j] == '0')
-                printf("  ", FOCP1[i][j]);
-            else if (i == 0 || j == 0)
-            {
-                if (i == 0)
-                    printf("%d ", j);
-                if (j == 0)
-                    printf("%d ", i);
-            }
+            Beep(1000, 500);
+            printf("\nOut of bounds . Please try again :\n");
         }
-        printf("       ");
-        for (j = 0; j < n + 1; j++)
-        {
-            if (i > 0 && j > 0)
-            {
-                if (FOCP2[i][j] == '~')
-                {
-                    bold_blue();
-                    printf("≋ ", FOCP2[i][j]);
-                    reset();
-                }
-                else if (FOCP2[i][j] == '^')
-                {
-                    bold_green();
-                    printf("♆ ", FOCP2[i][j]);
-                    reset();
-                }
-            }
-            if (FOCP1[i][j] == '0')
-                printf("  ", FOCP1[i][j]);
-            else if (i == 0 || j == 0)
-            {
-                if (i == 0)
-                    printf("%d ", j);
-                if (j == 0)
-                    printf("%d ", i);
-            }
-        }
-        printf("\n");
+        put1(x, y, n);
+        clrscr();
+        board1(n);
+        if (FOCP1[x][y] == '*')
+            acount--;
+        if (acount == 0)
+            break;
+        Sleep(2500);
+        clrscr();
     }
-    return 0;*/
+    clrscr();
+    if (acount == 0)
+        printf("commander %s won", name2);
+    else if (bcount == 0)
+        printf("commander %s won", name1);
 }
