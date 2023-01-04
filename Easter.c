@@ -237,7 +237,7 @@ int easter(){
         printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr.DeKiller ");
         Sleep(2500);
         clrscr();
-        printf("\n\n\n\nEnding #1 : Allies 4ever\n\n\n");
+        printf("\n\n\n\nEnding #1 : Allies 4 ever\n\n\n");
         return 1;
     }
     return 0;
