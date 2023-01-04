@@ -1,4 +1,3 @@
-@@ -1,417 +1,442 @@
 #include <stdio.h>
 #include <string.h>
 #include <conio.h>
