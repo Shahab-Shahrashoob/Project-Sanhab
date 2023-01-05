@@ -8,6 +8,7 @@ char FOCP1[21][21];
 char FOCP2[21][21];
 char name1[20];
 char name2[20];
+FILE *save;
 
 void bold_blue()
 {
@@ -60,6 +61,26 @@ void intro()
     printf("\n\n\nEnjoy the game");
     Sleep(1500);
     clrscr();
+}
+
+void menu(){
+    char mode[14];
+    printf("\n\n\n     ⚓ Battleship ⚓\n\n         👊 Singleplayer 👊\n\n     🤝 Multiplayer 🤝\n\n     💾 Continue last game 💾");
+    do{
+        printf("\n\nPlease enter your game mode : ");
+        scanf("%s",mode);
+        if(strcmp(mode,"singleplayer")==0)sw=1;
+        if(strcmp(mode,"multiplayer")==0)sw=2;
+        if(strcmp(mode,"continue")==0){
+            save=fopen("save.dat","rb");
+            if(save==NULL){
+                printf("\nYou don't have any saved games .");
+                sw=0;
+            }
+            else sw=3;
+            fclose(save);
+        }
+    }
 }
 
 int easter()
