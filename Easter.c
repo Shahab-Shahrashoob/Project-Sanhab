@@ -286,7 +286,7 @@ int main()
 {
     clrscr();
     intro();
-    int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount,mode;
+    int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount, mode;
     char vh;
     mode=4;
     clrscr();
