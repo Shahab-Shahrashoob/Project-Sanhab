@@ -346,8 +346,7 @@ int main()
         }
     }
     //-------------------------------------------------------------------------------//
-    acount = shipcheck1(n); /*Attack*/
-    bcount = shipcheck2(n);
+    acount = bcount = 3*ships; /*Attack*/
     for (; acount != 0 && bcount != 0;)
     {
         printf("%s\n",name1);
