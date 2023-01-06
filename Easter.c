@@ -67,41 +67,6 @@ void intro()
     clrscr();
 }
 
-int menu(){
-    char mode[14];
-    int sw=0;
-    printf("\n\n\n         ⚓ Battleship ⚓\n\n        👊 Singleplayer 👊\n\n        🤝 Multiplayer 🤝\n\n       💾 Continue last game 💾\n\n       📝 Read from input 📝");
-    do{
-        printf("\n\nPlease enter your game mode : ");
-        scanf("%s",mode);
-        if(strcmp(mode,"singleplayer")==0)sw=1;
-        if(strcmp(mode,"multiplayer")==0)sw=2;
-        if(strcmp(mode,"continue")==0){
-            save=fopen("save.dat","rb");
-            if(save==NULL){
-                bold_red();
-                printf("\nYou don't have any saved games ");
-                reset();
-                sw=0;
-            }
-            else sw=3;
-            fclose(save);
-        }
-        if(strcmp(mode,"input")==0){
-            input=fopen("input.txt","r");
-            if(input==NULL){
-               bold_red();
-                printf("\nCan't find input.txt ");
-                reset();
-                sw=0; 
-            }
-            else sw=4;
-            fclose(input);
-        }
-    }while(sw==0);
-    return sw;
-}
-
 int easter()
 {
     int i, j;
@@ -323,7 +288,7 @@ int main()
     intro();
     int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount,mode;
     char vh;
-    mode=menu();
+    mode=4;
     clrscr();
     if(mode==1||mode==2||mode==4){
         if(mode!=4){
