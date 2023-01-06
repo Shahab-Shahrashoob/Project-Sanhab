@@ -8,7 +8,11 @@ char FOCP1[21][21];
 char FOCP2[21][21];
 char name1[20];
 char name2[20];
+char bin[4];
+char ship1[10][7];
+char ship2[10][7];
 FILE *save;
+FILE *input;
 
 void bold_blue()
 {
@@ -66,7 +70,7 @@ void intro()
 int menu(){
     char mode[14];
     int sw=0;
-    printf("\n\n\n         ⚓ Battleship ⚓\n\n        👊 Singleplayer 👊\n\n        🤝 Multiplayer 🤝\n\n     💾 Continue last game 💾");
+    printf("\n\n\n         ⚓ Battleship ⚓\n\n        👊 Singleplayer 👊\n\n        🤝 Multiplayer 🤝\n\n       💾 Continue last game 💾\n\n       📝 Read from input 📝");
     do{
         printf("\n\nPlease enter your game mode : ");
         scanf("%s",mode);
@@ -76,12 +80,23 @@ int menu(){
             save=fopen("save.dat","rb");
             if(save==NULL){
                 bold_red();
-                printf("\nYou don't have any saved games .");
+                printf("\nYou don't have any saved games ");
                 reset();
                 sw=0;
             }
             else sw=3;
             fclose(save);
+        }
+        if(strcmp(mode,"input")==0){
+            input=fopen("input.txt","r");
+            if(input==NULL){
+               bold_red();
+                printf("\nCan't find input.txt ");
+                reset();
+                sw=0; 
+            }
+            else sw=4;
+            fclose(input);
         }
     }while(sw==0);
     return sw;
@@ -307,16 +322,15 @@ int main()
     clrscr();
     intro();
     int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount,mode;
+    char vh;
     mode=menu();
     clrscr();
-    if(mode!=3){
+    if(mode==1||mode==2||mode==4){
+        if(mode!=4){
     printf("Board size : ");
     scanf("%d", &n);
     printf("Number of ships : ");
     scanf("%d", &ships);
-    char bin[4];
-    char ship1[ships][7];
-    char ship2[ships][7];
     //---------------------------------------------------------------------------------//
     clrscr();
     getchar(); /*Scaning the coordinates*/
@@ -372,6 +386,33 @@ int main()
     }
     printf("\n");
     clrscr();
+        }
+    else {
+        input=fopen("input.txt","r");
+        fscanf(input,"%d",&n);
+        fscanf(input,"%d",&ships);
+        fscanf(input,"%s",name1);
+        for(i=0;i<ships;i++){
+            fscanf(input,"%d %d %c\n",&x,&y,&vh);
+            if (vh == 'h')
+                for (k = 0; k < 3; k++)
+                    FOCP1[x][y + k] = '^';
+            else if (vh == 'v')
+                for (k = 0; k < 3; k++)
+                    FOCP1[x + k][y] = '^';
+        }
+        fscanf(input,"%s",name2);
+        for(i=0;i<ships;i++){
+            fscanf(input,"%d %d %c\n",&x,&y,&vh);
+            if (vh == 'h')
+                for (k = 0; k < 3; k++)
+                    FOCP2[x][y + k] = '^';
+            else if (vh == 'v')
+                for (k = 0; k < 3; k++)
+                    FOCP2[x + k][y] = '^';
+        }
+        fclose(input);
+    }
     i=easter();
     if(i==1)return 1;
     //---------------------------------------------------------------------------------//
