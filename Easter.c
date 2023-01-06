@@ -366,6 +366,7 @@ int main()
                 for (k = 0; k < 3; k++)
                     FOCP1[x + k][y] = '^';
         }
+        fscanf(input,"%s",bin);
         fscanf(input,"%s",name2);
         for(i=0;i<ships;i++){
             fscanf(input,"%d %d %c\n",&x,&y,&vh);
