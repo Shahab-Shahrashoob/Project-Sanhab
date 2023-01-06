@@ -140,26 +140,6 @@ int placement_check2(char a, char b, char c, int n)
     }
 }
 
-int shipcheck1(int n){
-    int count,i,j;
-    for(i=1;i<n+1;i++){
-        for(j=1;j<n+1;j++){
-            if(FOCP1[i][j]=='^')count++;
-        }
-    }
-    return count;
-}
-
-int shipcheck2(int n){
-    int count,i,j;
-    for(i=1;i<n+1;i++){
-        for(j=1;j<n+1;j++){
-            if(FOCP2[i][j]=='^')count++;
-        }
-    }
-    return count;
-}
-
 void board1(int n)
 {
     int i, j;
@@ -286,101 +266,40 @@ int main()
 {
     clrscr();
     intro();
-    int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount, mode;
+    int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount;
     char vh;
-    mode=4;
     clrscr();
-    if(mode==1||mode==2||mode==4){
-        if(mode!=4){
-    printf("Board size : ");
-    scanf("%d", &n);
-    printf("Number of ships : ");
-    scanf("%d", &ships);
-    //---------------------------------------------------------------------------------//
-    clrscr();
-    getchar(); /*Scaning the coordinates*/
-    printf("\nPlayer 1's name :\n\n");
-    gets(name1);
-    printf("\nPlease enter your ships coordinates commander %s :\n\n", name1);
+    //----------------------------------------------------------------------------------------//
+    input = fopen("input.txt", "r");
+    fscanf(input, "%d", &n);
+    fscanf(input, "%d", &ships);
+    fscanf(input, "%s", name1);
     for (i = 0; i < ships; i++)
     {
-        fgets(ship1[i], 7, stdin);
-        j = placement_check1(ship1[i][0], ship1[i][2], ship1[i][4], n);
-        if (j == 0)
-        {
-            x = ship1[i][0] - '0';
-            y = ship1[i][2] - '0';
-            if (ship1[i][4] == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x][y + k] = '^';
-            else if (ship1[i][4] == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x + k][y] = '^';
-        }
-        else if (j == 1)
-        {
-            Beep(1000, 500);
-            printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
-            i--;
-        }
+        fscanf(input, "%d %d %c\n", &x, &y, &vh);
+        if (vh == 'h')
+            for (k = 0; k < 3; k++)
+                FOCP1[x][y + k] = '^';
+        else if (vh == 'v')
+            for (k = 0; k < 3; k++)
+                FOCP1[x + k][y] = '^';
     }
-    printf("\nPlayer 2's name :\n\n");
-    gets(name2);
-    printf("\nPlease enter your ships coordinates commander %s :\n\n", name2);
+    fscanf(input, "%s", bin);
+    fscanf(input, "%s", name2);
     for (i = 0; i < ships; i++)
     {
-        fgets(ship2[i], 7, stdin);
-        j = placement_check2(ship2[i][0], ship2[i][2], ship2[i][4], n);
-        if (j == 0)
-        {
-            x = ship2[i][0] - '0';
-            y = ship2[i][2] - '0';
-            if (ship2[i][4] == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x][y + k] = '^';
-            else if (ship2[i][4] == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x + k][y] = '^';
-        }
-        else if (j == 1)
-        {
-            Beep(1000, 500);
-            printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
-            i--;
-        }
+        fscanf(input, "%d %d %c\n", &x, &y, &vh);
+        if (vh == 'h')
+            for (k = 0; k < 3; k++)
+                FOCP2[x][y + k] = '^';
+        else if (vh == 'v')
+            for (k = 0; k < 3; k++)
+                FOCP2[x + k][y] = '^';
     }
-    printf("\n");
-    clrscr();
-        }
-    else {
-        input=fopen("input.txt","r");
-        fscanf(input,"%d",&n);
-        fscanf(input,"%d",&ships);
-        fscanf(input,"%s",name1);
-        for(i=0;i<ships;i++){
-            fscanf(input,"%d %d %c\n",&x,&y,&vh);
-            if (vh == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x][y + k] = '^';
-            else if (vh == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x + k][y] = '^';
-        }
-        fscanf(input,"%s",bin);
-        fscanf(input,"%s",name2);
-        for(i=0;i<ships;i++){
-            fscanf(input,"%d %d %c\n",&x,&y,&vh);
-            if (vh == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x][y + k] = '^';
-            else if (vh == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x + k][y] = '^';
-        }
-        fclose(input);
-    }
-    i=easter();
-    if(i==1)return 1;
+    fclose(input);
+    i = easter();
+    if (i == 1)
+        return 1;
     //---------------------------------------------------------------------------------//
     for (i = 0; i < n + 1; i++) /*Grid for player 1*/
     {
@@ -411,16 +330,11 @@ int main()
                 FOCP2[i][j] = '~';
         }
     }
-    }
-    else if(mode==3){
-        /*save*/
-    }
     //-------------------------------------------------------------------------------//
-    acount = shipcheck1(n); /*Attack*/
-    bcount = shipcheck2(n);
+    acount = bcount = 3 * ships; /*Attack*/
     for (; acount != 0 && bcount != 0;)
     {
-        printf("%s\n",name1);
+        printf("%s\n", name1);
         board2(n);
         printf("\ncommander %s's attack\n\n", name1);
         scanf("%d %d", &x, &y);
@@ -439,7 +353,7 @@ int main()
             break;
         Sleep(2500);
         clrscr();
-        printf("%s\n",name2);
+        printf("%s\n", name2);
         board1(n);
         printf("\ncommander %s's attack\n\n", name2);
         scanf("%d %d", &x, &y);
