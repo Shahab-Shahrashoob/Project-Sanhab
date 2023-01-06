@@ -288,71 +288,6 @@ int main()
     intro();
     int i, j, k, sw, x, y, n, len1, len2, delta, ships, acount, bcount, mode;
     char vh;
-    mode=4;
-    clrscr();
-    if(mode==1||mode==2||mode==4){
-        if(mode!=4){
-    printf("Board size : ");
-    scanf("%d", &n);
-    printf("Number of ships : ");
-    scanf("%d", &ships);
-    //---------------------------------------------------------------------------------//
-    clrscr();
-    getchar(); /*Scaning the coordinates*/
-    printf("\nPlayer 1's name :\n\n");
-    gets(name1);
-    printf("\nPlease enter your ships coordinates commander %s :\n\n", name1);
-    for (i = 0; i < ships; i++)
-    {
-        fgets(ship1[i], 7, stdin);
-        j = placement_check1(ship1[i][0], ship1[i][2], ship1[i][4], n);
-        if (j == 0)
-        {
-            x = ship1[i][0] - '0';
-            y = ship1[i][2] - '0';
-            if (ship1[i][4] == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x][y + k] = '^';
-            else if (ship1[i][4] == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x + k][y] = '^';
-        }
-        else if (j == 1)
-        {
-            Beep(1000, 500);
-            printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
-            i--;
-        }
-    }
-    printf("\nPlayer 2's name :\n\n");
-    gets(name2);
-    printf("\nPlease enter your ships coordinates commander %s :\n\n", name2);
-    for (i = 0; i < ships; i++)
-    {
-        fgets(ship2[i], 7, stdin);
-        j = placement_check2(ship2[i][0], ship2[i][2], ship2[i][4], n);
-        if (j == 0)
-        {
-            x = ship2[i][0] - '0';
-            y = ship2[i][2] - '0';
-            if (ship2[i][4] == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x][y + k] = '^';
-            else if (ship2[i][4] == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x + k][y] = '^';
-        }
-        else if (j == 1)
-        {
-            Beep(1000, 500);
-            printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
-            i--;
-        }
-    }
-    printf("\n");
-    clrscr();
-        }
-    else {
         input=fopen("input.txt","r");
         fscanf(input,"%d",&n);
         fscanf(input,"%d",&ships);
@@ -378,7 +313,6 @@ int main()
                     FOCP2[x + k][y] = '^';
         }
         fclose(input);
-    }
     i=easter();
     if(i==1)return 1;
     //---------------------------------------------------------------------------------//
@@ -410,10 +344,6 @@ int main()
             if (FOCP2[i][j] != '^')
                 FOCP2[i][j] = '~';
         }
-    }
-    }
-    else if(mode==3){
-        /*save*/
     }
     //-------------------------------------------------------------------------------//
     acount = shipcheck1(n); /*Attack*/
