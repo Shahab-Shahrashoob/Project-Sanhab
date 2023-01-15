@@ -19,6 +19,7 @@ char ship1[10][7];
 char ship2[10][7];
 FILE *save;
 FILE *input;
+FILE *replay;
 
 void bold_blue()
 {
@@ -71,6 +72,42 @@ void welcome()
     printf("\n\n\nEnjoy the game....!");
     Sleep(1500);
     clrscr();
+}
+
+void credits(){
+    Sleep(5000);
+    clrscr();
+    printf("\n\n\nCredits\n\n");
+    Sleep(3000);
+    printf("Developed and created by \n\n");
+    Sleep(3000);
+    bold_green();
+    printf("Sania Dolat Abadi\n\n");
+    reset();
+    Sleep(2500);
+    bold_cyan();
+    printf("Shahab Shahrashoob\n\n\n");
+    reset();
+    Sleep(2500);
+    printf("Special thanks to \n\n");
+    Sleep(2500);
+    printf("Our best professor ");
+    Sleep(2500);
+    bold_yellow();
+    printf("Saeed Abrishami\n\n");
+    reset();
+    Sleep(2500);
+    printf("And our kind mentor ");
+    Sleep(2500);
+    bold_magenta();
+    printf("Tahoora Saeedi");
+    reset();
+    Sleep(4000);
+    clrscr();
+    printf("\n\n\nThanks for playing");
+    Sleep(3000);
+    clrscr();
+    exit(EXIT_SUCCESS);
 }
 
 void battleship()
@@ -803,6 +840,7 @@ int menu()
     {
         printf(" ");
     }
+    printf("3.Replay");
     printf("\n\n");
     for (i = 0; i < 40; i++)
     {
@@ -915,6 +953,24 @@ int menucheck(int choice)
         }
     }
 }
+
+void savereplay()
+{
+    replay = fopen("replay.dat", "ab");
+    fwrite(name1, sizeof(name1), 1, replay);
+    fwrite(name2, sizeof(name2), 1, replay);
+    fwrite(&n, sizeof(n), 1, replay);
+    fwrite(&ships, sizeof(ships), 1, replay);
+    fwrite(FOCP1, sizeof(FOCP1), 1, replay);
+    fwrite(FOCP2, sizeof(FOCP2), 1, replay);
+    fclose(replay);
+}
+
+void deletereplay(){
+    replay=fopen("replay.dat","wb");
+    fclose(replay);
+}
+
 void savegame()
 {
     save = fopen("save.dat", "wb");
@@ -1095,6 +1151,31 @@ void board2()
     }
 }
 
+void replaing(){
+    clrscr();
+    int i,j,k;
+    replay=fopen("replay.dat","rb");
+    fread(name1,sizeof(name1),1,replay);
+    while(!feof(replay)){
+        fread(name2,sizeof(name2),1,replay);
+        fread(&n,sizeof(n),1,replay);
+        fread(&ships,sizeof(ships),1,replay);
+        fread(FOCP1,sizeof(FOCP1),1,replay);
+        fread(FOCP2,sizeof(FOCP2),1,replay);
+        printf("%s\n",name1);
+        board2();
+        printf("\n\n_________________________________________________________\n\n");
+        printf("%s\n",name2);
+        board1();
+        Sleep(3000);
+        clrscr();
+        fread(name1,sizeof(name1),1,replay);
+    }
+    fclose(replay);
+    clrscr();
+    exit(EXIT_SUCCESS);
+}
+
 int placement_check1(char a, char b, char c, int n)
 {
     if (c == 'h')
@@ -1172,6 +1253,7 @@ void AIinsert(int n, int ships)
 {
     int x, y, i, ch, j, k;
     char vh;
+    strcpy(name2,"AI");
     for (i = 0; i < ships; i++)
     {
         x = rand() % n + 1;
@@ -1319,11 +1401,12 @@ void singleplayergame()
     int acount, bcount, x, y, q;
     clrscr();
     printf("\n\nIf you want to exit the game , enter coordinates 0 and 0 .");
-    Sleep(2000);
+    Sleep(3000);
     clrscr();
     acount = bcount = ships * 3;
     for (; acount != 0 && bcount != 0;)
     {
+        savereplay();
         printf("AI\n");
         board2();
         printf("\ncommander %s attack\n\n", name1);
@@ -1512,6 +1595,7 @@ void multiplayergame()
         Sleep(2500);
         clrscr();
         savegame();
+        savereplay();
     }
     if (acount == 0)
         printf("Commander %s Won", name2);
@@ -1537,15 +1621,20 @@ int main()
                 res1 = menu();
                 res = menucheck(1);
             }
-            else
+            else{
+                deletereplay();
                 singleplayergame();
+                credits();
+            }
         }
         if (res == 2)
         {
+            deletereplay();
             singleplayerinsert();
             AIinsert(n, ships);
             boardfiller();
             singleplayergame();
+            credits();
         }
     }
     while (res1 == 2)
@@ -1561,26 +1650,39 @@ int main()
                 res1 = menu();
                 res = menucheck(2);
             }
-            else
+            else{
+                deletereplay();
                 multiplayergame();
+                credits();
+            }
         }
         if (res == 4)
         {
+            deletereplay();
             multiplayerinsertT();
             boardfiller();
             multiplayergame();
+            credits();
         }
         else if (res == 5)
         {
+            deletereplay();
             clrscr();
             continuegame();
             multiplayergame();
+            credits();
         }
         else if (res == 6)
         {
+            deletereplay();
             multiplayerinsertF();
             boardfiller();
             multiplayergame();
+            credits();
         }
+    }
+    while(res1==3)
+    {
+        replaing();
     }
 }
