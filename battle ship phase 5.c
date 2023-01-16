@@ -9,7 +9,7 @@
 #define LEFT 4
 #define NOTHING 0
 
-int ships, n, xai, yai;
+int ships, n, repair, xai, yai;
 char FOCP1[21][21];
 char FOCP2[21][21];
 char name1[20];
@@ -20,6 +20,9 @@ char ship2[10][7];
 FILE *save;
 FILE *input;
 FILE *replay;
+typedef struct{
+    int x,y,no;
+}Ship;
 
 void bold_blue()
 {
@@ -897,6 +900,7 @@ int menucheck(int choice)
         clrscr();
         if (strcmp(type, "Terminal") == 0)
         {
+            printf("\n\n\n");
             for (i = 0; i < 40; i++)
             {
                 printf(" ");
@@ -1034,7 +1038,7 @@ void boardfiller()
     {
         for (j = 1; j < n + 1; j++)
         {
-            if (FOCP1[i][j] != '^')
+            if (FOCP1[i][j] != 's')
                 FOCP1[i][j] = '~';
         }
     }
@@ -1047,7 +1051,7 @@ void boardfiller()
     {
         for (j = 1; j < n + 1; j++)
         {
-            if (FOCP2[i][j] != '^')
+            if (FOCP2[i][j] != 's')
                 FOCP2[i][j] = '~';
         }
     }
@@ -1176,43 +1180,57 @@ void replaing(){
     exit(EXIT_SUCCESS);
 }
 
-int placement_check1(char a, char b, char c, int n)
+int area1(Ship a, int x, int y,char c)
 {
+    int i,j,k,sw=1;
     if (c == 'h')
     {
-        if (FOCP1[a - 48][b - 48] == '^' || FOCP1[a - 48][b - 47] == '^' || FOCP1[a - 48][b - 46] == '^' || a - 48 > n || b - 48 > n - 2)
-            return 1;
-        else
-            return 0;
+        for(i=0;i<a.x&&sw==1;i++){
+            for(j=0;j<a.y&&sw==1;j++){
+                if(FOCP1[i+x][j+y]=='^'||i+x>n||i+x<0||j+y>n||j+y<0)sw=0;
+                else (FOCP1[x+i][y+j]='^');
+            }
+        }
+        return sw;
     }
     if (c == 'v')
     {
-        if (FOCP1[a - 48][b - 48] == '^' || FOCP1[a - 47][b - 48] == '^' || FOCP1[a - 46][b - 48] == '^' || a - 48 > n - 2 || b - 48 > n)
-            return 1;
-        else
-            return 0;
+        for(i=0;i<a.y&&sw==1;i++){
+            for(j=0;j<a.x&&sw==1;j++){
+                if(FOCP1[i+y][j+x]=='^'||i+y>n||i+y<0||j+x>n||j+x<0)sw=0;
+                else (FOCP1[y+i][x+j]='^');
+            }
+        }
+        return sw;
     }
 }
 
-int placement_check2(char a, char b, char c, int n)
+int area2(Ship a, int x, int y,char c)
 {
+    int i,j,k,sw=1;
     if (c == 'h')
     {
-        if (FOCP2[a - 48][b - 48] == '^' || FOCP2[a - 48][b - 47] == '^' || FOCP2[a - 48][b - 46] == '^' || a - 48 > n - 2 || b - 48 > n - 2)
-            return 1;
-        else
-            return 0;
+        for(i=0;i<a.x&&sw==1;i++){
+            for(j=0;j<a.y&&sw==1;j++){
+                if(FOCP2[i+x][j+y]=='^'||i+x>n||i+x<0||j+y>n||j+y<0)sw=0;
+                else (FOCP2[x+i][y+j]='^');
+            }
+        }
+        return sw;
     }
     if (c == 'v')
     {
-        if (FOCP2[a - 48][b - 48] == '^' || FOCP2[a - 47][b - 48] == '^' || FOCP2[a - 46][b - 48] == '^' || a - 48 > n - 2 || b - 48 > n - 2)
-            return 1;
-        else
-            return 0;
+        for(i=0;i<a.y&&sw==1;i++){
+            for(j=0;j<a.x&&sw==1;j++){
+                if(FOCP2[i+y][j+x]=='^'||i+y>n||i+y<0||j+x>n||j+x<0)sw=0;
+                else (FOCP2[y+i][x+j]='^');
+            }
+        }
+        return sw;
     }
 }
 
-void singleplayerinsert()
+/*void singleplayerinsert()
 {
     clrscr();
     int i, j, k, x, y;
@@ -1276,7 +1294,7 @@ void AIinsert(int n, int ships)
         else if (j == 1)
             i--;
     }
-}
+}*/
 
 void put1(int x, int y)
 {
@@ -1452,62 +1470,84 @@ void singleplayergame()
 void multiplayerinsertT()
 {
     clrscr();
-    int i, j, k, x, y;
+    int i, j, k, x, y,mode,choice,count;
+    Ship ship;
     printf("Board size : ");
     scanf("%d", &n);
     printf("Number of ships : ");
     scanf("%d", &ships);
+    printf("Repairs : ");
+    scanf("%d",&repair);
     clrscr();
     getchar();
     printf("\nPlayer 1's name :\n\n");
     gets(name1);
+    count=ships;
+    choice=1;
+    while(count>0&&choice==1){
+    printf("\nPlease enter your ship's info commander %s :\n\n",name1);
+    scanf("%d %d %d",&ship.x,&ship.y,&ship.no);
+    while(ship.x*ship.y*ship.no>count){
+        Beep(1000, 500);
+        printf("\nTo rohet ######## , Please enter another correct info (jan madaret) :\n");
+        scanf("%d %d %d",&ship.x,&ship.y,&ship.no);
+    }
+    if(ship.x>ship.y){
+        i=ship.y;
+        ship.y=ship.x;
+        ship.x=i;
+    }
+    getchar();
     printf("\nPlease enter your ships coordinates commander %s :\n\n", name1);
-    for (i = 0; i < ships; i++)
-    {
+    for(i=0;i<ship.no;i++){
         fgets(ship1[i], 7, stdin);
-        j = placement_check1(ship1[i][0], ship1[i][2], ship1[i][4], n);
-        if (j == 0)
-        {
-            x = ship1[i][0] - '0';
-            y = ship1[i][2] - '0';
-            if (ship1[i][4] == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x][y + k] = '^';
-            else if (ship1[i][4] == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP1[x + k][y] = '^';
-        }
-        else if (j == 1)
-        {
+        j=area1(ship,ship1[i][0]-'0',ship1[i][2]-'0',ship1[i][4]);
+        if(j==0){
             Beep(1000, 500);
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
             i--;
         }
     }
+    count-=(ship.x*ship.y*ship.no);
+    if(count==0)break;
+    clrscr();
+    printf("You have %d ship left . Do you want to continue ?\n\n1.Yes !\n2.No\n\n Your answer : ",count);
+    scanf("%d",&choice);
+    }
+    getchar();
     printf("\nPlayer 2's name :\n\n");
     gets(name2);
+    count=ships;
+    choice=1;
+    while(count>0&&choice==1){
+    printf("\nPlease enter your ship's info commander %s :\n\n",name2);
+    scanf("%d %d %d",&ship.x,&ship.y,&ship.no);
+    while(ship.x*ship.y*ship.no>ships){
+        Beep(1000, 500);
+        printf("\nTo rohet ######## , Please enter another correct info (jan madaret) :\n");
+        scanf("%d %d %d",&ship.x,&ship.y,&ship.no);
+    }
+    if(ship.y>ship.x){
+        i=ship.y;
+        ship.y=ship.x;
+        ship.x=i;
+    }
+    getchar();
     printf("\nPlease enter your ships coordinates commander %s :\n\n", name2);
-    for (i = 0; i < ships; i++)
-    {
+    for(i=0;i<ship.no;i++){
         fgets(ship2[i], 7, stdin);
-        j = placement_check2(ship2[i][0], ship2[i][2], ship2[i][4], n);
-        if (j == 0)
-        {
-            x = ship2[i][0] - '0';
-            y = ship2[i][2] - '0';
-            if (ship2[i][4] == 'h')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x][y + k] = '^';
-            else if (ship2[i][4] == 'v')
-                for (k = 0; k < 3; k++)
-                    FOCP2[x + k][y] = '^';
-        }
-        else if (j == 1)
-        {
+        j=area2(ship,ship2[i][0]-'0',ship2[i][2]-'0',ship2[i][4]);
+        if(j==0){
             Beep(1000, 500);
             printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
             i--;
         }
+    }
+    count-=ship.x*ship.y*ship.no;
+    if(count==0)break;
+    clrscr();
+    printf("You have %d ship left . Do you want to continue ?\n\n1.Yes !\n2.No\n\n Your answer : ",count);
+    scanf("%d",&choice);
     }
     printf("\n");
     clrscr();
@@ -1548,7 +1588,8 @@ void multiplayerinsertF()
 void multiplayergame()
 {
     int acount, bcount, x, y;
-    acount = bcount = ships * 3;
+    acount=ship_check1();
+    bcount=ship_check2();
     clrscr();
     printf("\n\nIf you want to exit the game , enter coordinates 0 and 0 .");
     Sleep(2000);
@@ -1630,10 +1671,10 @@ int main()
         if (res == 2)
         {
             deletereplay();
-            singleplayerinsert();
+            /*singleplayerinsert();
             AIinsert(n, ships);
             boardfiller();
-            singleplayergame();
+            singleplayergame();*/
             credits();
         }
     }
