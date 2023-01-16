@@ -1684,5 +1684,6 @@ int main()
     while(res1==3)
     {
         replaing();
+        Sleep(2500);
     }
 }
