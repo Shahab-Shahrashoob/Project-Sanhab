@@ -1675,27 +1675,32 @@ void multiplayerinsertF()
 void multiplayergame()
 {
     int acount, bcount, x, y, choice, arepair, brepair, i;
-    char command[5];
+    char command1[4], command2[4];
     boardfiller();
     acount = ship_check1();
     bcount = ship_check2();
     arepair = brepair = repair;
     clrscr();
-    getchar();
     printf("\n\nIf you want to exit the game , enter e\n\nIf you want to repair , enter r.");
     Sleep(2500);
     clrscr();
+    getchar();
     for (; acount != 0 && bcount != 0;)
     {
         printf("commander %s turn\n\n", name1);
-        board1();
-        fgets(command,5,stdin);
-        if (command[0] == 'e')
+        board2();
+        printf("\nRemaining Repairs: %d\n", arepair);
+        printf("\n\nCommander %s Attack!\n\n", name1);
+        getchar();
+        fgets(command1, 4, stdin);
+        clrscr();
+        if (command1[0] == 'e')
         {
             exit(EXIT_SUCCESS);
         }
-        else if (command[0] == 'r')
+        else if (command1[0] == 'r')
         {
+            clrscr();
             if (arepair == 0)
             {
                 printf("You don't have any repairs left\n");
@@ -1716,15 +1721,11 @@ void multiplayergame()
             Sleep(2500);
             clrscr();
         }
-        else if (command[0] != 'r' && command[0] != 'e')
+        else if (command1[0] >= '1' && command1[0] <= '9')
         {
-            printf("%s\n\n", name2);
-            board2();
-            printf("\nRemaining Repairs: %d\n", arepair);
-            printf("\n\nCommander %s Attack!\n\n", name1);
-            Sleep(1000);
-            x = command[0] - '0';
-            y = command[2] - '0';
+            clrscr();
+            x = command1[0] - '0';
+            y = command1[2] - '0';
             while (x > n || y > n)
             {
                 Beep(1000, 500);
@@ -1742,14 +1743,23 @@ void multiplayergame()
             clrscr();
         }
         printf("commander %s turn\n\n", name2);
-        board2();
-        fgets(command,5,stdin);
-        if (command[0] == 'e')
+        board1();
+        printf("\nRemaining Repairs: %d\n", brepair);
+        printf("\n\nCommander %s Attack!\n\n", name2);
+        fgets(command2, 4, stdin);
+        clrscr();
+        if (command2[0] == 'e')
         {
             exit(EXIT_SUCCESS);
         }
-        else if (command[0] == 'r')
+        else if (command2[0] == 'r')
         {
+            clrscr();
+            if (brepair == 0)
+            {
+                printf("You don't have any repairs left\n");
+                break;
+            }
             printf("%s\n\n", name2);
             board2();
             scanf("%d %d", &x, &y);
@@ -1765,14 +1775,11 @@ void multiplayergame()
             Sleep(2500);
             clrscr();
         }
-        else if (command[0] != 'r' && command[0] != 'e')
+        else if (command2[0] >= '1' && command2[0] <= '9')
         {
-            printf("%s\n\n", name1);
-            board1();
-            printf("\nRemaining Repairs: %d\n", brepair);
-            printf("\n\nCommander %s Attack!\n\n", name2);
-            x = command[0] - '0';
-            y = command[2] - '0';
+            clrscr();
+            x = command2[0] - '0';
+            y = command2[2] - '0';
             while (x > n || y > n)
             {
                 Beep(1000, 500);
