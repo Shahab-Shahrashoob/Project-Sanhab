@@ -102,7 +102,7 @@ void credits()
     printf("Saeed Abrishami\n\n");
     reset();
     Sleep(2500);
-    printf("And our kind mentor ");
+    printf("And our kind mentor\n ");
     Sleep(2500);
     bold_red();
     printf("Tahoora Saeedi");
@@ -1078,7 +1078,7 @@ void board1()
                 else if (FOCP1[i][j] == '^')
                 {
                     bold_blue();
-                    printf("≋ ", FOCP1[i][j]);
+                    printf("s ", FOCP1[i][j]);
                     reset();
                 }
                 else if (FOCP1[i][j] == 'o')
@@ -1127,7 +1127,7 @@ void board2()
                 else if (FOCP2[i][j] == '^')
                 {
                     bold_blue();
-                    printf("≋ ", FOCP2[i][j]);
+                    printf("s ", FOCP2[i][j]);
                     reset();
                 }
                 else if (FOCP2[i][j] == 'o')
@@ -1566,7 +1566,7 @@ void multiplayerinsertT()
         while (ship.x * ship.y * ship.no > count)
         {
             Beep(1000, 500);
-            printf("\nTo rohet ######## , Please enter another correct info (jan madaret) :\n");
+            printf("\nPlease enter another correct INFO:\n");
             scanf("%d %d %d", &ship.x, &ship.y, &ship.no);
         }
         if (ship.x > ship.y)
@@ -1594,6 +1594,7 @@ void multiplayerinsertT()
         clrscr();
         printf("You have %d ship left . Do you want to continue ?\n\n1.Yes !\n2.No\n\n Your answer : ", count);
         scanf("%d", &choice);
+        clrscr();
     }
     getchar();
     printf("\nPlayer 2's name :\n\n");
@@ -1607,7 +1608,7 @@ void multiplayerinsertT()
         while (ship.x * ship.y * ship.no > ships)
         {
             Beep(1000, 500);
-            printf("\nTo rohet ######## , Please enter another correct info (jan madaret) :\n");
+            printf("\nPlease enter another correct INFO:\n");
             scanf("%d %d %d", &ship.x, &ship.y, &ship.no);
         }
         if (ship.y > ship.x)
@@ -1635,6 +1636,7 @@ void multiplayerinsertT()
         clrscr();
         printf("You have %d ship left . Do you want to continue ?\n\n1.Yes !\n2.No\n\n Your answer : ", count);
         scanf("%d", &choice);
+        clrscr();
     }
     printf("\n");
     clrscr();
@@ -1643,39 +1645,50 @@ void multiplayerinsertT()
 void multiplayerinsertF()
 {
     char vh;
+    char bin[4];
     int x, y, i, k;
+    Ship ship;
     input = fopen("input.txt", "r");
-    fscanf(input, "%d", &n);
-    fscanf(input, "%d", &ships);
+    fscanf(input, "%d\n", &n);
+    fscanf(input, "%d\n", &ships);
     fscanf(input, "%s", name1);
-    for (i = 0; i < ships; i++)
+    while (bin[0] != '-')
     {
-        fscanf(input, "%d %d %c\n", &x, &y, &vh);
-        if (vh == 'h')
-            for (k = 0; k < 3; k++)
-                FOCP1[x][y + k] = '^';
-        else if (vh == 'v')
-            for (k = 0; k < 3; k++)
-                FOCP1[x + k][y] = '^';
+        fscanf(input, "%d %d %d\n", &ship.x, &ship.y, &ship.no);
+        for (i = 0; i < ship.no; i++)
+        {
+            fscanf(input, "%d %d %c\n", &x, &y, &vh);
+            area1(ship, x, y, vh);
+        }
+        fscanf(input, "%s\n", bin);
     }
     fscanf(input, "%s", name2);
-    for (i = 0; i < ships; i++)
+    while (bin[0] != '-')
     {
-        fscanf(input, "%d %d %c\n", &x, &y, &vh);
-        if (vh == 'h')
-            for (k = 0; k < 3; k++)
-                FOCP2[x][y + k] = '^';
-        else if (vh == 'v')
-            for (k = 0; k < 3; k++)
-                FOCP2[x + k][y] = '^';
+        fscanf(input, "%d %d %d", &ship.x, &ship.y, &ship.no);
+        for (i = 0; i < ship.no; i++)
+        {
+            fscanf(input, "%d %d %c %c\n", &x, &y, &vh, &vh);
+            area2(ship, x, y, vh);
+        }
+        fscanf(input, "%s", bin);
     }
+    fscanf(input, "%d", &repair);
     fclose(input);
+}
+int main()
+{
+    clrscr();
+    multiplayerinsertF();
+    boardfiller();
+    board1();
+    board2();
 }
 
 void multiplayergame()
 {
-    int acount, bcount, x, y, choice, arepair, brepair, i;
-    char command1[4], command2[4];
+    int acount, bcount, x, y, choice, arepair, brepair, i, turn = 0;
+    char command = '0';
     boardfiller();
     acount = ship_check1();
     bcount = ship_check2();
@@ -1684,128 +1697,141 @@ void multiplayergame()
     printf("\n\nIf you want to exit the game , enter e\n\nIf you want to repair , enter r.");
     Sleep(2500);
     clrscr();
-    getchar();
     for (; acount != 0 && bcount != 0;)
     {
-        printf("commander %s turn\n\n", name1);
-        board2();
-        printf("\nRemaining Repairs: %d\n", arepair);
-        printf("\n\nCommander %s Attack!\n\n", name1);
-        getchar();
-        fgets(command1, 4, stdin);
-        clrscr();
-        if (command1[0] == 'e')
+        if (turn % 2 == 0)
         {
-            exit(EXIT_SUCCESS);
-        }
-        else if (command1[0] == 'r')
-        {
-            clrscr();
-            if (arepair == 0)
-            {
-                printf("You don't have any repairs left\n");
-                break;
-            }
-            printf("%s\n\n", name1);
-            board1();
-            scanf("%d %d", &x, &y);
-            while (FOCP1[x][y] != '*')
-            {
-                printf("Please enter correct coordinates:\n");
-                scanf("%d %d", &x, &y);
-            }
-            FOCP1[x][y] = '^';
-            arepair--;
-            clrscr();
-            board1();
-            Sleep(2500);
-            clrscr();
-        }
-        else if (command1[0] >= '1' && command1[0] <= '9')
-        {
-            clrscr();
-            x = command1[0] - '0';
-            y = command1[2] - '0';
-            while (x > n || y > n)
-            {
-                Beep(1000, 500);
-                printf("\nOut of bounds . Please try again :\n");
-                scanf("%d %d", &x, &y);
-            }
-            put2(x, y);
-            clrscr();
+            printf("commander %s 's turn\n\n", name1);
             board2();
-            if (FOCP2[x][y] == '*')
-                bcount--;
-            if (bcount == 0)
-                break;
-            Sleep(2500);
-            clrscr();
-        }
-        printf("commander %s turn\n\n", name2);
-        board1();
-        printf("\nRemaining Repairs: %d\n", brepair);
-        printf("\n\nCommander %s Attack!\n\n", name2);
-        fgets(command2, 4, stdin);
-        clrscr();
-        if (command2[0] == 'e')
-        {
-            exit(EXIT_SUCCESS);
-        }
-        else if (command2[0] == 'r')
-        {
-            clrscr();
-            if (brepair == 0)
+            printf("\nRemaining Repairs: %d\n", arepair);
+            printf("\nCommander %s Attack!\n", name1);
+            scanf("%c", &command);
+            while (command != 'r' && command != 'e' && !(command >= '1' && command <= '9'))
             {
-                printf("You don't have any repairs left\n");
-                break;
+                scanf("%c", &command);
             }
-            printf("%s\n\n", name2);
-            board2();
-            scanf("%d %d", &x, &y);
-            while (FOCP2[x][y] != '*')
+            if (command == 'e')
             {
-                printf("Please enter correct coordinates:\n");
+                exit(EXIT_SUCCESS);
+            }
+            else if (command == 'r')
+            {
+                clrscr();
+                if (arepair == 0)
+                {
+                    printf("You don't have any repairs left\n");
+                    break;
+                }
+                printf("%s\n\n", name1);
+                board1();
                 scanf("%d %d", &x, &y);
+                while (FOCP1[x][y] != '*')
+                {
+                    printf("Please enter correct coordinates:\n");
+                    scanf("%d %d", &x, &y);
+                }
+                FOCP1[x][y] = '^';
+                arepair--;
+                clrscr();
+                board1();
+                Sleep(2500);
+                clrscr();
             }
-            FOCP2[x][y] = '^';
-            brepair--;
-            clrscr();
-            board2();
-            Sleep(2500);
-            clrscr();
-        }
-        else if (command2[0] >= '1' && command2[0] <= '9')
-        {
-            clrscr();
-            x = command2[0] - '0';
-            y = command2[2] - '0';
-            while (x > n || y > n)
+            else if (command >= '1' && command <= '9')
             {
-                Beep(1000, 500);
-                printf("\nOut of bounds . Please try again :\n");
-                scanf("%d %d", &x, &y);
+                scanf("%d", &y);
+                x = command - '0';
+                while (x > n || y > n)
+                {
+                    Beep(1000, 500);
+                    printf("\nOut of bounds . Please try again :\n");
+                    scanf("%d %d", &x, &y);
+                }
+                put2(x, y);
+                clrscr();
+                board2();
+                if (FOCP2[x][y] == '*')
+                    bcount--;
+                if (bcount == 0)
+                    break;
+                Sleep(2500);
+                clrscr();
             }
-            put1(x, y);
             clrscr();
+            turn++;
+        }
+        else
+        {
+            printf("commander %s 's turn\n\n", name2);
             board1();
-            if (FOCP1[x][y] == '*')
-                acount--;
-            if (acount == 0)
-                break;
-            Sleep(2500);
+            printf("\nRemaining Repairs: %d\n", brepair);
+            printf("\nCommander %s Attack!\n", name2);
+            scanf("%c", &command);
+            while (command != 'r' && command != 'e' && !(command >= '1' && command <= '9'))
+            {
+                scanf("%c", &command);
+            }
+            if (command == 'e')
+            {
+                exit(EXIT_SUCCESS);
+            }
+            else if (command == 'r')
+            {
+                clrscr();
+                if (brepair == 0)
+                {
+                    printf("You don't have any repairs left\n");
+                    break;
+                }
+                printf("%s\n\n", name2);
+                board2();
+                scanf("%d %d", &x, &y);
+                while (FOCP2[x][y] != '*')
+                {
+                    printf("Please enter correct coordinates:\n");
+                    scanf("%d %d", &x, &y);
+                }
+                FOCP2[x][y] = '^';
+                brepair--;
+                clrscr();
+                board2();
+                Sleep(2500);
+                clrscr();
+            }
+            else if (command >= '1' && command <= '9')
+            {
+                scanf("%d", &y);
+                x = command - '0';
+                while (x > n || y > n)
+                {
+                    Beep(1000, 500);
+                    printf("\nOut of bounds . Please try again :\n");
+                    scanf("%d %d", &x, &y);
+                }
+                put1(x, y);
+                clrscr();
+                board1();
+                if (FOCP1[x][y] == '*')
+                    acount--;
+                if (acount == 0)
+                    break;
+                Sleep(2500);
+                clrscr();
+            }
             clrscr();
+            turn++;
         }
         savegame();
         savereplay();
     }
+    clrscr();
     if (acount == 0)
         printf("Commander %s Won", name2);
     else if (bcount == 0)
         printf("Commander %s Won", name1);
 }
 
-int main()
+/*int main()
 {
     clrscr();
     welcome();
@@ -1837,10 +1863,10 @@ int main()
             AIinsert(n, ships);
             boardfiller();
             singleplayergame();*/
-            credits();
-        }
+            /*credits();*/
+        /*}
     }
-    while (res1 == 2)
+    /*while (res1 == 2)
     {
         res = menucheck(2);
         while (res == 3)
@@ -1890,4 +1916,4 @@ int main()
         replaing();
         Sleep(2500);
     }
-}
+}*/
