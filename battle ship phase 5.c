@@ -146,7 +146,7 @@ void board1()
                 else if (FOCP1[i][j] == '^')
                 {
                     bold_blue();
-                    printf("s ", FOCP1[i][j]);
+                    printf("≋ ", FOCP1[i][j]);
                     reset();
                 }
                 else if (FOCP1[i][j] == 'o')
@@ -195,7 +195,7 @@ void board2()
                 else if (FOCP2[i][j] == '^')
                 {
                     bold_blue();
-                    printf("s ", FOCP2[i][j]);
+                    printf("≋ ", FOCP2[i][j]);
                     reset();
                 }
                 else if (FOCP2[i][j] == 'o')
@@ -679,9 +679,9 @@ void multiplayerinsertT()
             printf("\nPlease enter another correct INFO:\n");
             scanf("%d %d %d", &ship.x, &ship.y, &ship.no);
         }
-        if (ship.y > ship.x)
+        if (ship.x > ship.y)
         {
-            i = ship.y;
+            i = ship.x;
             ship.y = ship.x;
             ship.x = i;
         }
