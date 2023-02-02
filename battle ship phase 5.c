@@ -652,7 +652,7 @@ void multiplayerinsertT()
             if (j == 0)
             {
                 Beep(1000, 500);
-                printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
+                printf("\nThere is something blocking your ship commander. Please try another coordinates :\n");
                 i--;
             }
         }
@@ -660,7 +660,7 @@ void multiplayerinsertT()
         if (count == 0)
             break;
         clrscr();
-        printf("You have %d ship left . Do you want to continue ?\n\n1.Yes !\n2.No\n\n Your answer : ", count);
+        printf("You have %d ship left . Do you want to continue ?\n\n1.Yes \n2.No\n\n Your answer : ", count);
         scanf("%d", &choice);
         clrscr();
     }
@@ -694,7 +694,7 @@ void multiplayerinsertT()
             if (j == 0)
             {
                 Beep(1000, 500);
-                printf("\nThere is something blocking your ship commander\a . Please try another coordinates :\n");
+                printf("\nThere is something blocking your ship commander. Please try another coordinates :\n");
                 i--;
             }
         }
@@ -702,7 +702,7 @@ void multiplayerinsertT()
         if (count == 0)
             break;
         clrscr();
-        printf("You have %d ship left . Do you want to continue ?\n\n1.Yes !\n2.No\n\n Your answer : ", count);
+        printf("You have %d ship left . Do you want to continue ?\n\n1.Yes \n2.No\n\n Your answer : ", count);
         scanf("%d", &choice);
         clrscr();
     }
