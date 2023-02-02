@@ -10,7 +10,7 @@
 #define LEFT 4
 #define NOTHING 0
 
-int ships, n, repair, xai, yai, arepair, brepair;
+int ships, n, repair, xai, yai, arepair, brepair,R;
 char FOCP1[21][21];
 char FOCP2[21][21];
 char name1[20];
@@ -57,12 +57,15 @@ void savegame()
     }
     else
     {
+        fwrite(&R, sizeof(R),1,save);
         fwrite(&n, sizeof(n), 1, save);
         fwrite(&ships, sizeof(ships), 1, save);
         fwrite(name1, sizeof(name1), 1, save);
         fwrite(FOCP1, sizeof(FOCP1), 1, save);
+        fwrite(&arepair,sizeof(arepair), 1,save);
         fwrite(name2, sizeof(name2), 1, save);
         fwrite(FOCP2, sizeof(FOCP2), 1, save);
+        fwrite(&brepair,sizeof(brepair), 1,save);
     }
     fclose(save);
 }
@@ -86,12 +89,27 @@ int continuegame()
     }
     else
     {
+        fread(&R,sizeof(R),1,save);
+        if (R == 1 ){
         fread(&n, sizeof(n), 1, save);
         fread(&ships, sizeof(ships), 1, save);
         fread(name1, sizeof(name1), 1, save);
         fread(FOCP1, sizeof(FOCP1), 1, save);
+        fread(&arepair,sizeof(arepair),1,save);
         fread(name2, sizeof(name2), 1, save);
         fread(FOCP2, sizeof(FOCP2), 1, save);
+        fread(&brepair,sizeof(brepair),1,save);
+        }
+        else if(R == 2 ){
+        fread(&n, sizeof(n), 1, save);
+        fread(&ships, sizeof(ships), 1, save);
+        fread(name2, sizeof(name2), 1, save);
+        fread(FOCP2, sizeof(FOCP2), 1, save);
+        fread(&brepair,sizeof(brepair),1,save);
+        fread(name1, sizeof(name1), 1, save);
+        fread(FOCP1, sizeof(FOCP1), 1, save);
+        fread(&arepair,sizeof(arepair),1,save);
+        }
     }
     fclose(save);
     return 0;
@@ -602,7 +620,7 @@ void singleplayergame()
         q = 0;
         Sleep(2500);
         clrscr();
-        savegame();
+        savegame(1);
     }
     if (acount == 0)
         printf("You Lost");
@@ -772,6 +790,7 @@ void multiplayergame()
             }
             if (command == 'e')
             {
+                R = 1;
                 savegame();
                 exit(EXIT_SUCCESS);
             }
@@ -836,6 +855,7 @@ void multiplayergame()
             }
             if (command == 'e')
             {
+                R = 2;
                 savegame();
                 exit(EXIT_SUCCESS);
             }

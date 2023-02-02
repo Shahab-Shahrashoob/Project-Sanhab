@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "sanhab": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "cmath": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
