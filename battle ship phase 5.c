@@ -19,9 +19,11 @@ char name2[20];
 char bin[4];
 char ship1[10][7];
 char ship2[10][7];
+
 FILE *save;
 FILE *input;
 FILE *replay;
+
 typedef struct
 {
     int x, y, no;
