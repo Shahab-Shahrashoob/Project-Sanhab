@@ -94,6 +94,43 @@ void credits()
     exit(EXIT_SUCCESS);
 }
 
+int easter(char name1[], char name2[])
+{
+    int i, j;
+    i = j = 0;
+    if (strcmp(name1, "$ania") == 0 || strcmp(name2, "$ania") == 0)
+        i = 1;
+    if (strcmp(name1, "ShahabDeKiller") == 0 || strcmp(name2, "ShahabDeKiller") == 0)
+        j = 1;
+    if (i == 1 && j == 1)
+    {
+        printf("\n\n\n\nDear Players...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nYou should know something...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nabout shahab and sania...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nThey are allies...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nyou can't put allies against each other...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nso...");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\ndon't mess around with Miss.DEATH and Mr.DeKiller ");
+        Sleep(2500);
+        clrscr();
+        printf("\n\n\n\nEnding #1 : Allies 4 ever\n\n\n");
+        return 1;
+    }
+    return 0;
+}
+
 void battleship()
 {
     int i;
@@ -824,7 +861,7 @@ int menu()
     {
         printf(" ");
     }
-    printf("3.Replay");
+    printf("3. ▶️  Replay ⏸");
     printf("\n\n");
     for (i = 0; i < 40; i++)
     {
@@ -848,7 +885,7 @@ int menucheck(int choice)
         {
             printf(" ");
         }
-        printf("1.Continue The Last Game ️🎮\n\n");
+        printf("1.Continue The Last Game ️💾\n\n");
         for (i = 0; i < 40; i++)
         {
             printf(" ");
@@ -869,72 +906,51 @@ int menucheck(int choice)
             return 1;
         else if (mode == 2)
             return 2;
+            clrscr();
     }
     else if (choice == 2)
     {
-        for (i = 0; i < 20; i++)
+        for (i = 0; i < 40; i++)
         {
             printf(" ");
         }
-        printf("Do You Want To Enter Your INFO In Terminal or File:");
-        scanf("%s", type);
-        clrscr();
-        if (strcmp(type, "Terminal") == 0)
+        printf("1.Continue The Last Game ️💾\n\n");
+        for (i = 0; i < 40; i++)
         {
-            printf("\n\n\n");
-            for (i = 0; i < 40; i++)
-            {
-                printf(" ");
-            }
-            printf("1.Continue The Last Game ️🎮\n\n");
-            for (i = 0; i < 40; i++)
-            {
-                printf(" ");
-            }
-            printf("Or\n\n");
-            for (i = 0; i < 40; i++)
-            {
-                printf(" ");
-            }
-            printf("2.New Game 🎮\n\n");
-            for (i = 0; i < 40; i++)
-            {
-                printf(" ");
-            }
-            printf("Please Enter Your Choice: ");
-            scanf("%d", &mode);
-            if (mode == 1)
-                return 3;
-            else if (mode == 2)
-                return 4;
+            printf(" ");
         }
-        else if (strcmp(type, "File") == 0)
+        printf("Or\n\n");
+        for (i = 0; i < 40; i++)
         {
-            for (i = 0; i < 40; i++)
+            printf(" ");
+        }
+        printf("2.New Game 🎮\n\n");
+        for (i = 0; i < 40; i++)
+        {
+            printf(" ");
+        }
+        printf("Please Enter Your Choice: ");
+        scanf("%d", &mode);
+        if (mode == 1)
+            return 3;
+        else if (mode == 2)
+        {
+            printf("\n\n");
+            for(i=0;i<40;i++)
             {
                 printf(" ");
             }
-            printf("1.Continue The Last Game ️🎮\n\n");
-            for (i = 0; i < 40; i++)
+            printf("Do You Want To Enter Your INFO In Terminal or File:");
+            scanf("%s", type);
+            clrscr();
+            if (strcmp(type, "Terminal") == 0)
             {
-                printf(" ");
+                return 4;
             }
-            printf("Or\n");
-            for (i = 0; i < 40; i++)
+            else if (strcmp(type, "File") == 0)
             {
-                printf(" ");
-            }
-            printf("2.New Game 🎮\n\n");
-            for (i = 0; i < 40; i++)
-            {
-                printf(" ");
-            }
-            printf("Please Enter Your Choice: ");
-            scanf("%d", &mode);
-            if (mode == 1)
                 return 5;
-            else if (mode == 2)
-                return 6;
+            }
         }
     }
 }

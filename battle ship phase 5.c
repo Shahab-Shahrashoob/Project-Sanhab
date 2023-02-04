@@ -351,11 +351,22 @@ void savereplay()
     fclose(replay);
 }
 
-void replaing()
+int replaying()
 {
     clrscr();
     int i, j, k;
     replay = fopen("replay.dat", "rb");
+    if(!replay)
+    {
+        for(i=0;i<40;i++)
+        {
+            printf(" ");
+        }
+        bold_red();
+        printf("You don't Have Any Saved Game");
+        reset();
+        return 0;
+    }
     fread(&n, sizeof(n), 1, replay);
     while (!feof(replay))
     {
@@ -376,6 +387,7 @@ void replaing()
         fread(&n, sizeof(n), 1, replay);
     }
     fclose(replay);
+    return 1;
     clrscr();
     exit(EXIT_SUCCESS);
 }
@@ -446,21 +458,20 @@ void AIinsert()
 {
     int x, y, i, ch, j, k, count;
     char vh;
-    Ship ai;
+    Ship AI;
     strcpy(name2, "AI");
-    srand(time(NULL));
     for (count = ships; count > 0;)
     {
-        ai.x = rand() % count + 1;
-        ai.y = rand() % count + 1;
-        ai.no = rand() % count + 1;
-        while (ai.x * ai.y * ai.no > ships)
+        AI.x = rand() % count + 1;
+        AI.y = rand() % count + 1;
+        AI.no = rand() % count + 1;
+        while (AI.x * AI.y * AI.no > count)
         {
-            ai.x = rand() % ships + 1;
-            ai.y = rand() % ships + 1;
-            ai.no = rand() % ships + 1;
+            AI.x = rand() % ships + 1;
+            AI.y = rand() % ships + 1;
+            AI.no = rand() % ships + 1;
         }
-        for (j = 0; j < ai.no; j++)
+        for (j = 0; j < AI.no; j++)
         {
             x = rand() % n + 1;
             y = rand() % n + 1;
@@ -469,11 +480,11 @@ void AIinsert()
                 vh = 'h';
             if (ch == 2)
                 vh = 'v';
-            k = area2(ai, x, y, vh);
+            k = area2(AI, x, y, vh);
             if (k == 0)
                 j--;
         }
-        count -= (ai.x * ai.y * ai.no);
+        count -= (AI.x * AI.y * AI.no);
     }
 }
 
@@ -811,6 +822,10 @@ void multiplayerinsertT()
         clrscr();
     }
     printf("\n");
+    if(easter(name1,name2)==1)
+    {
+        exit(EXIT_SUCCESS);
+    }
     clrscr();
 }
 
@@ -824,7 +839,7 @@ void multiplayerinsertF()
     fscanf(input, "%d\n", &n);
     fscanf(input, "%d\n", &ships);
     fscanf(input, "%s", name1);
-    while (bin[0] != '-')
+    while (bin[1] != '-')
     {
         fscanf(input, "%d %d %d\n", &ship.x, &ship.y, &ship.no);
         for (i = 0; i < ship.no; i++)
@@ -1006,7 +1021,11 @@ int main()
     clrscr();
     welcome();
     battleship();
+    srand(time(NULL));
+    start:
     int i, res, res1 = menu();
+    while(res1==1||res1==2||res1==3)
+    {
     while (res1 == 1)
     {
         res = menucheck(1);
@@ -1016,8 +1035,7 @@ int main()
             if (i != 0)
             {
                 battleship();
-                res1 = menu();
-                res = menucheck(1);
+                goto start;
             }
             else
             {
@@ -1046,8 +1064,7 @@ int main()
             if (i != 0)
             {
                 battleship();
-                res1 = menu();
-                res = menucheck(2);
+                goto start;
             }
             else
             {
@@ -1081,7 +1098,14 @@ int main()
     }
     while (res1 == 3)
     {
-        replaing();
-        Sleep(2500);
+        i=replaying();
+        if(i==0)
+        {
+            Sleep(2500);
+            clrscr();
+            battleship();
+            goto start;
+        }
+    }
     }
 }
