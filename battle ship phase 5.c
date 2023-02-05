@@ -12,8 +12,9 @@
 #define NOTHING 0
 
 int ships, n, repair, xai, yai, arepair, brepair, R;
-char FOCP1[21][21];
-char FOCP2[21][21];
+long int leng;
+char FOCP1[10][10];
+char FOCP2[10][10];
 char name1[20];
 char name2[20];
 char bin[4];
@@ -34,6 +35,7 @@ void savegame()
     save = fopen("save.dat", "wb");
     if (!save)
     {
+        Beep(1000, 500);
         bold_red();
         printf("Can't Open Save File");
         reset();
@@ -59,6 +61,7 @@ int continuegame()
     if (save == NULL)
     {
         int i;
+        Beep(1000, 500);
         bold_red();
         for (i = 0; i < 40; i++)
         {
@@ -354,11 +357,12 @@ void savereplay()
 int replaying()
 {
     clrscr();
-    int i, j, k;
+    int i, j, k, sw;
     replay = fopen("replay.dat", "rb");
-    if(!replay)
+    if (!replay)
     {
-        for(i=0;i<40;i++)
+        Beep(1000, 500);
+        for (i = 0; i < 40; i++)
         {
             printf(" ");
         }
@@ -367,9 +371,12 @@ int replaying()
         reset();
         return 0;
     }
-    fread(&n, sizeof(n), 1, replay);
-    while (!feof(replay))
+    leng = 2 * (sizeof(FOCP1) + sizeof(arepair) + sizeof(name1) + sizeof(n));
+    j = sw = 1;
+    fread(&n, sizeof(n), 1 , replay);
+    while (sw == 1)
     {
+        printf("Press D or W to go to the next round\nAnd press A or S to go to the previous round\nEnter e to exit to menu\n\nCurrent round = %d\n\n", j);
         fread(&ships, sizeof(ships), 1, replay);
         fread(name1, sizeof(name1), 1, replay);
         fread(&arepair, sizeof(arepair), 1, replay);
@@ -382,12 +389,54 @@ int replaying()
         printf("\n\n_________________________________________________________\n\n");
         printf("%s\n", name2);
         board2();
-        Sleep(4000);
-        clrscr();
-        fread(&n, sizeof(n), 1, replay);
+        k = getch();
+        if (k == 'e'){
+            clrscr();
+            sw=0;
+        }
+        else if (k == 's' || k == 'a')
+        {
+            fseek(replay, -2*leng, 1);
+            j--;
+            clrscr();
+            if(j==0){
+            for (i = 0; i < 40; i++)
+            {
+                printf(" ");
+            }
+            bold_red();
+            printf("No more previous rounds");
+            reset();
+            Beep(1000, 500);
+            Sleep(2500);
+            j=1;
+            fseek(replay,0,0);
+            clrscr();
+            }
+        }
+        else if (k == 'w' || k == 'd'){
+            j++;
+            clrscr();
+        }
+        else
+        {
+            clrscr();
+            for (i = 0; i < 40; i++)
+            {
+                printf(" ");
+            }
+            bold_red();
+            printf("Wrong key ...");
+            reset();
+            Beep(1000, 500);
+            Sleep(2500);
+            fseek(replay, -leng, 1);
+            clrscr();
+        }
+        fread(&n, sizeof(n), 1 , replay);
+        if(feof(replay))sw=0;
     }
     fclose(replay);
-    return 1;
     clrscr();
     exit(EXIT_SUCCESS);
 }
@@ -822,7 +871,7 @@ void multiplayerinsertT()
         clrscr();
     }
     printf("\n");
-    if(easter(name1,name2)==1)
+    if (easter(name1, name2) == 1)
     {
         exit(EXIT_SUCCESS);
     }
@@ -1022,90 +1071,90 @@ int main()
     welcome();
     battleship();
     srand(time(NULL));
-    start:
+start:
     int i, res, res1 = menu();
-    while(res1==1||res1==2||res1==3)
+    while (res1 == 1 || res1 == 2 || res1 == 3)
     {
-    while (res1 == 1)
-    {
-        res = menucheck(1);
-        while (res == 1)
+        while (res1 == 1)
         {
-            i = continuegame();
-            if (i != 0)
+            res = menucheck(1);
+            while (res == 1)
             {
-                battleship();
-                goto start;
+                i = continuegame();
+                if (i != 0)
+                {
+                    battleship();
+                    goto start;
+                }
+                else
+                {
+                    singleplayerinsert();
+                    singleplayergame();
+                    credits();
+                }
             }
-            else
+            if (res == 2)
             {
+                deletereplay();
                 singleplayerinsert();
+                AIinsert(n, ships);
+                boardfiller();
                 singleplayergame();
                 credits();
             }
         }
-        if (res == 2)
+        while (res1 == 2)
         {
-            deletereplay();
-            singleplayerinsert();
-            AIinsert(n, ships);
-            boardfiller();
-            singleplayergame();
-            credits();
-        }
-    }
-    while (res1 == 2)
-    {
-        res = menucheck(2);
-        while (res == 3)
-        {
-            clrscr();
-            i = continuegame();
-            if (i != 0)
+            res = menucheck(2);
+            while (res == 3)
             {
-                battleship();
-                goto start;
+                clrscr();
+                i = continuegame();
+                if (i != 0)
+                {
+                    battleship();
+                    goto start;
+                }
+                else
+                {
+                    multiplayergame();
+                    credits();
+                }
             }
-            else
+            if (res == 4)
             {
+                deletereplay();
+                multiplayerinsertT();
+                boardfiller();
+                multiplayergame();
+                credits();
+            }
+            else if (res == 5)
+            {
+                clrscr();
+                continuegame();
+                multiplayergame();
+                credits();
+            }
+            else if (res == 6)
+            {
+                deletereplay();
+                multiplayerinsertF();
+                boardfiller();
                 multiplayergame();
                 credits();
             }
         }
-        if (res == 4)
+        while (res1 == 3)
         {
-            deletereplay();
-            multiplayerinsertT();
-            boardfiller();
-            multiplayergame();
-            credits();
+            i = replaying();
+            if (i == 0)
+            {
+                Sleep(2500);
+                clrscr();
+                battleship();
+                goto start;
+            }
         }
-        else if (res == 5)
-        {
-            clrscr();
-            continuegame();
-            multiplayergame();
-            credits();
-        }
-        else if (res == 6)
-        {
-            deletereplay();
-            multiplayerinsertF();
-            boardfiller();
-            multiplayergame();
-            credits();
-        }
-    }
-    while (res1 == 3)
-    {
-        i=replaying();
-        if(i==0)
-        {
-            Sleep(2500);
-            clrscr();
-            battleship();
-            goto start;
-        }
-    }
     }
 }
