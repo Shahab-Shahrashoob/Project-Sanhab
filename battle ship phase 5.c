@@ -201,7 +201,7 @@ void board2(void)
                 else if (FOCP2[i][j] == '^')
                 {
                     bold_blue();
-                    printf("S ", FOCP2[i][j]);
+                    printf("≋ ", FOCP2[i][j]);
                     reset();
                 }
                 else if (FOCP2[i][j] == 'o')
@@ -1059,10 +1059,12 @@ void multiplayergame()
         }
     }
     clrscr();
+    bold_yellow();
     if (acount == 0)
         printf("Commander %s Won", name2);
     else if (bcount == 0)
         printf("Commander %s Won", name1);
+    reset();
 }
 
 int main()
