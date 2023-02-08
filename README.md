@@ -35,10 +35,15 @@ A missed shot from one of the players
 A hit from one of the players 
 
 In everyturn, each player can choose to attack or repair their ship . They have to enter " r " to proceed to repaire mode . If they have no repair points, they will lose that round and its other player's turn .
+The game goes on until one of the players has no more ships on his board .
 
 ![image](https://user-images.githubusercontent.com/117520004/217516621-49a3ebe9-c90f-41a5-818a-81ea4df6ad8a.png)
 
 Replay of the game
+
+
+
+
 
 SPECIAL thanks to Miss Dolat Abadi for their infinite passion on this project .
 It was quite an adventure ......
