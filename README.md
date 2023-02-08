@@ -15,7 +15,6 @@ The game features following options :
 
 
 ![menu](https://user-images.githubusercontent.com/117520004/217514862-063494bc-1dc7-4201-bbf2-97757c95074d.png)
-
 -Game Menu
 
 
@@ -23,7 +22,6 @@ Before play begins, each player secretly arranges their ships on their grid. Eac
 
 
 ![b1](https://user-images.githubusercontent.com/117520004/217515042-4e2a8092-5dbb-4f99-94b4-d2f3752a34fb.png)
-
 -Player 2's 4X4 board with Player 1 in command
 
 
@@ -31,12 +29,10 @@ After the ships have been positioned, the game proceeds in a series of rounds. I
 
 
 ![miss](https://user-images.githubusercontent.com/117520004/217515579-2a8f84e1-d1c0-408f-8407-f39b4f7251fe.png)
-
 -A missed shot from one of the players
 
 
 ![hit](https://user-images.githubusercontent.com/117520004/217515873-59166cc3-458b-4a8b-8775-8c2ad91678d5.png)
-
 -A hit from one of the players 
 
 
@@ -44,7 +40,6 @@ In everyturn, each player can choose to attack or repair their ship . They have 
 The game goes on until one of the players has no more ships on his board .
 
 ![image](https://user-images.githubusercontent.com/117520004/217516621-49a3ebe9-c90f-41a5-818a-81ea4df6ad8a.png)
-
 Replay of the game
 
 
